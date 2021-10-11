@@ -20,8 +20,9 @@ function Header( { loadingSuggestions, clearSuggestions }: Props ) {
 
 
     useEffect( () => {
-        loadingSuggestions(name);
-    }, [name]);
+        if(name.length >= 3)
+            loadingSuggestions(name);
+    }, [name, loadingSuggestions]);
 
     const onSubmitSearchProductName = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
