@@ -1,31 +1,14 @@
 
 import { useEffect, useState } from 'react';
-import { connect, ConnectedProps } from 'react-redux';
-import GlobalState from '../../types/GlobalState';
 
-import { PaginationContainer, PaginationItem, PaginationLink } from './styles';
+import connector, { Props } from './connector';
 
-
-
-const mapStateToProps = (state: GlobalState) => ({
-    limit: state.products.limit,
-    page: state.products.page,
-    count: state.products.count
-});
-
-const connector = connect( mapStateToProps )
+import { PaginationContainer, PaginationButton } from './styles';
 
 
 
-type PropsFromRedux = ConnectedProps<typeof connector>
-interface Props extends PropsFromRedux {
-    buttons?: number
-}
-
-
-
-function Pagination( { buttons = 5, count, limit, page }: Props ) {
-    const [ position, setPosition ] = useState([ 1, buttons ]);
+function Pagination( { buttons = 5, count, limit, page, setPage, incrementPage, decrementPage }: Props ) {
+    const [ arrayButtons, setArrayButtons ] = useState<number[]>([]);
 
     useEffect( () => {
         const pages = Math.ceil(count/limit);
@@ -36,6 +19,7 @@ function Pagination( { buttons = 5, count, limit, page }: Props ) {
             'middlePagination': [ page-margin, page+margin ],
             'finalPagination': [ pages-buttons+2, pages ]
         }
+
         const startPagination = page <= margin+1;
         const middlePagination = page > margin+1 && page <= pages-margin;
         const interval = startPagination 
@@ -44,37 +28,46 @@ function Pagination( { buttons = 5, count, limit, page }: Props ) {
                 ? 'middlePagination'
                 : 'finalPagination';
 
-        setPosition( intervals[interval] );
-    }, []);
+        const [ start, end ] = intervals[interval];
+
+        const btns = [];
+        for( let i = start; i <= end; i++) {
+            btns.push(i);
+        }
+
+        setArrayButtons(btns);
+    }, [page, count, limit, buttons]);
+
+    useEffect( () => {
+        window.scrollTo(0,0);
+    }, [page]);
 
 
-    return(
-        <PaginationContainer>
-            <PaginationItem active={page > 1} >
-                <PaginationLink to="/products">
-                    Anterior
-                </PaginationLink>
-            </PaginationItem>
 
-            { Array
-                .from({ length: position[1] - position[0] + 1 })
-                .map( (_, index ) => position[0] + index )
+    return(<>
+        { count > 0 && <PaginationContainer>
+            <PaginationButton 
+                active={page > 1} 
+                onClick={ () => decrementPage() }
+                disabled={page <= 1}
+            > Anterior </PaginationButton>
+
+            { arrayButtons
                 .map( current => (
-                    <PaginationItem active={current === page} key={`pagination___${current}`}>
-                        <PaginationLink to={`/products?page=${current}&limit=${limit}`} >
-                            {current}
-                        </PaginationLink>
-                    </PaginationItem>
+                    <PaginationButton
+                        active={page===current}
+                        onClick={() => setPage(current)}
+                    > {current} </PaginationButton>
                 ))
             }
 
-            <PaginationItem active={ page < Math.ceil(count/limit) }>
-                <PaginationLink to="/products" >
-                    Próximo
-                </PaginationLink>
-            </PaginationItem>
-        </PaginationContainer>
-    );
+            <PaginationButton 
+                active={ page < Math.ceil(count/limit) }
+                onClick={() => incrementPage()}
+                disabled={page >= Math.ceil(count/limit)}  
+            > Próximo </PaginationButton>
+        </PaginationContainer>}
+    </>);
 }
 
 export default connector( Pagination );
