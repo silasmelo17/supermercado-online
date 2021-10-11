@@ -17,12 +17,16 @@ export const INITIAL_PRODUCTS_STATE = {
 
 export const INITIAL_USER_STATE = {}
 
+export const INITIAL_HEADER_STATE = {
+    suggestions: []
+}
 
 
 const INITIAL_STATE: GlobalState = {
     authentication: INITIAL_AUTH_STATE,
     products: INITIAL_PRODUCTS_STATE,
-    user: INITIAL_USER_STATE
+    user: INITIAL_USER_STATE,
+    header: INITIAL_HEADER_STATE
 };
 
 
