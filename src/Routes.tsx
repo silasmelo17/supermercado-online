@@ -8,6 +8,7 @@ import {
 import Header from './components/Header';
 
 import Products from './pages/Products/';
+import ProductsByCategory from './pages/ProductsByCategory';
 import ProductsByName from './pages/ProductsByName/';
 import SignIn from './pages/SignIn';
 
@@ -21,6 +22,9 @@ function Routes() {
             <Switch>
                 <Route path="/products/name/:name">
                     <ProductsByName />
+                </Route>
+                <Route path="/products/category/:id">
+                    <ProductsByCategory />
                 </Route>
                 <Route path="/products">
                     <Products />
