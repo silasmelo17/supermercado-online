@@ -33,11 +33,11 @@ interface Props extends PropsFromRedux {}
 
 function Products( { page, count, limit, getAll, resetPage }: Props ) {
 
-    useEffect( () => resetPage(), []);
+    useEffect( () => resetPage(), [resetPage]);
 
     useEffect( () => {
         getAll();
-    }, [ page, limit ]);
+    }, [ page, limit, getAll ]);
 
     return(
         <main>
