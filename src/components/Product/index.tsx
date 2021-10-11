@@ -10,11 +10,11 @@ import {
 
 
 
-function Product( { id, name, price, image_src }: TypeProduct) {
+function Product( { id, name, price, image_src, favorite }: TypeProduct) {
     return(
         <ProductContainer>
             <FavoriteProduct>
-                <FavoriteIcon />
+                <FavoriteIcon favorite={favorite} />
             </FavoriteProduct>
 
             <Link to={`/products/${id}`}>

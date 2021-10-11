@@ -51,8 +51,8 @@ export const FavoriteProduct = styled.div`
     transition: color 200ms;
 `;
 
-export const FavoriteIcon = styled(FaHeart)`
-    color: #efefef;
+export const FavoriteIcon = styled(FaHeart)<{ favorite?: boolean}>`
+    color: ${ (props) => props.favorite ? 'red': '#efefef' };
 
     &:hover {
         color: red;
