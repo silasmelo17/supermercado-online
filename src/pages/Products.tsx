@@ -1,38 +1,39 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { connect, ConnectedProps } from 'react-redux';
 
-import api from '../config/axios.config';
+import ListProducts from "../components/ListProducts";
+import Pagination from '../components/Pagination';
 
-import ListProducts from '../components/ListProducts';
-
-import AxiosResponseProducts from '../types/AxiosResponseProducts';
-import TypeProduct from '../types/TypeProduct';
-
+import ThunksProducts from '../store/products/thunks'
 
 
-function Products() {
-    const [ products, setProducts ] = useState<TypeProduct[]>([]);
-    const [ page ] = useState<number>(1);
-    const [ limit ] = useState<number>(30);
 
-    useEffect(() => {
-        (async () => {
-            const {data} = await api.get<AxiosResponseProducts>('/products', {
-                params: {
-                    page, limit
-                }
-            });
 
-            setProducts( data.data );
-        })();
-    }, [ limit, page ]);
+const mapDispatchToProps = (dispatch: any ) => ({
+    getAll: () => dispatch(ThunksProducts.findAllProducts())
+});
+
+const connector = connect( undefined, mapDispatchToProps );
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+interface Props extends PropsFromRedux {}
+
+
+
+function Products( props: Props ) {
+    useEffect( () => {
+        props.getAll();
+    }, []);
 
     return(
         <main>
-            <h1>Lista de produtos</h1>
-            <ListProducts products={products} />
+            <h2>Lista de produtos</h2>
+            <ListProducts />
+            <Pagination buttons={7} />
         </main>
     );
 }
 
-export default Products;
+export default connector(Products);
