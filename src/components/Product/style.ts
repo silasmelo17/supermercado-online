@@ -51,11 +51,12 @@ export const FavoriteProduct = styled.div`
     transition: color 200ms;
 `;
 
-
-interface IconColor {
-    favorite: boolean;
-}
-
 export const FavoriteIcon = styled(FaHeart)`
     color: #efefef;
+
+    &:hover {
+        color: red;
+        cursor: pointer;
+        transition: color 200ms;
+    }
 `;

@@ -1,9 +1,7 @@
 
-import React from 'react';
-
 import { Link } from 'react-router-dom';
 
-import TypeProduct from '../../types/TypeProduct';
+import TypeProduct from '../../types/Product';
 
 import { 
     BuyProduct, ProductContainer, ImageContainer, ProductImage, ProductName, 
@@ -12,7 +10,7 @@ import {
 
 
 
-function Product( { id, nome, preco, image_src }: TypeProduct) {
+function Product( { id, name, price, image_src }: TypeProduct) {
     return(
         <ProductContainer>
             <FavoriteProduct>
@@ -26,13 +24,13 @@ function Product( { id, nome, preco, image_src }: TypeProduct) {
             </Link>
             
             <ProductName>
-                {nome}
+                {name}
             </ProductName>
             <span>
                 {new Intl.NumberFormat( 'pt-br' , { 
                     style: 'currency' ,
                     currency: 'BRL'
-                }).format(preco)}
+                }).format(price || 0)}
             </span>
 
             <BuyProduct>Adicionar</BuyProduct>
