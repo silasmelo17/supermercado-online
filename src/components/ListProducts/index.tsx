@@ -1,26 +1,9 @@
 
-import { connect, ConnectedProps  } from 'react-redux'; 
-
-import GlobalState from '../../types/GlobalState';
-
 import Product from '../Product';
 
 import { ProductsContainer } from './styles';
 
-
-
-const mapStateToProps = (state: GlobalState) => ({
-    products: state.products.data
-});
-
-const connector = connect(mapStateToProps );
-
-
-
-type PropsFromRedux = ConnectedProps<typeof connector>
-
-interface Props extends PropsFromRedux {}
-
+import connector, { Props } from './connector';
 
 
 
