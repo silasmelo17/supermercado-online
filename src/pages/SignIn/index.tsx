@@ -1,18 +1,22 @@
 
 import { useState } from 'react';
 
-import { Link } from 'react-router-dom';
-
 import { ButtonHighlight, Form, Input, ColumnContainer, Label } from '../../components/Forms/styles';
 import { UserIcon, UserIconContainer, ForgetPassoword } from './styles';
 
+import connector, { Props } from './connector';
 
 
-function SignIn() {
-    const [ email, setEmail ] = useState<string>();
-    const [ password, setPassword ] = useState<string>();
+
+function SignIn({ signInUser }: Props) {
+    const [ email, setEmail ] = useState<string>('');
+    const [ password, setPassword ] = useState<string>('');
 
 
+
+    const onClickSignIn = () => {
+        signInUser(email, password);
+    }
 
     return(
         <Form>
@@ -46,7 +50,7 @@ function SignIn() {
             </ColumnContainer>
 
             <ColumnContainer>
-                <ButtonHighlight>
+                <ButtonHighlight onClick={onClickSignIn}>
                     Sign In
                 </ButtonHighlight>
             </ColumnContainer>
@@ -54,4 +58,4 @@ function SignIn() {
     );
 }
 
-export default SignIn;
+export default connector(SignIn);
