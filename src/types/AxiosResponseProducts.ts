@@ -1,5 +1,5 @@
 
-import TypeProduct from './TypeProduct';
+import Product from './Product';
 
 
 
@@ -8,7 +8,8 @@ interface AxiosResponseProducts {
     limit: number,
     offset: number,
     count: number,
-    data: TypeProduct[]
+    data: Product[],
+    term?: string
 }
 
 export default AxiosResponseProducts;
