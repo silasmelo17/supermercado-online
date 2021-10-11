@@ -1,14 +1,21 @@
 
 import { connect, ConnectedProps } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
+import findAllProductsByCategory from '../../store/products/thunks/findAllProductsByCategory';
 
 import GlobalState from '../../types/GlobalState';
 
 
 
-const mapStateToProps = (state: GlobalState) => ({});
+const mapStateToProps = (state: GlobalState) => ({
+    count: state.products.count
+});
 
-const connector = connect( mapStateToProps );
+const mapDispatchProps = (dispatch:any) => ({ 
+    loadProducts: (id:number) => dispatch( findAllProductsByCategory(id) )
+ });
+
+const connector = connect( mapStateToProps, mapDispatchProps );
 
 
 

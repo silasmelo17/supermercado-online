@@ -1,4 +1,5 @@
 
+import { useEffect } from 'react';
 import { withRouter } from 'react-router';
 
 import ListProducts from "../../components/ListProducts";
@@ -8,10 +9,17 @@ import connector, { Props } from "./connector";
 
 
 
-function ProductsByCategory( props: Props ) {
+function ProductsByCategory( { count, match, loadProducts }: Props ) {
+    
+    useEffect( () => {
+        const { id } = match.params;
+        loadProducts( Number(id) );
+    }, [loadProducts, match.params ]);
+
     return(
         <main>
-            <h1>Produtos da categoria ""</h1>
+            <h2>Lista de produtos</h2>
+            <span>{count} produtos encontrados.</span>
 
             <ListProducts />
             <Pagination buttons={7} />
