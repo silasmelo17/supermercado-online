@@ -10,12 +10,12 @@ import GlobalState from "../../../types/GlobalState";
 
 
 
-function findAllProducts() {
+function findAllProductsByName( name: string ) {
     return async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState  ) => {
         const { page, limit } = (getState()).products;
         const { token } = (getState()).authentication;
 
-        const { data } = await axios.get<AxiosResponseProducts>( '/products', {
+        const { data } = await axios.get<AxiosResponseProducts>( `/products/name/${name}`, {
             headers: { token },
             params: { limit, page }
         });
@@ -24,4 +24,4 @@ function findAllProducts() {
     }
 }
 
-export default findAllProducts;
+export default findAllProductsByName;

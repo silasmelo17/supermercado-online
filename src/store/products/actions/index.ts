@@ -1,10 +1,18 @@
 
-import findAllProducts from "./findAllProducts";
+import setProducts from "./setProducts";
+import setPage from "./setPage";
+
+import * as PRODUCTS_TYPE from "../types";
 
 
 
 const ActionProducts = {
-    findAllProducts
+    setProducts,
+    setPage,
+
+    resetPage: () => ({ type: PRODUCTS_TYPE.RESET_PAGE }),
+    incrementPage: () => ({ type: PRODUCTS_TYPE.INCREMENT_PAGE }),
+    decrementPage: () => ({ type: PRODUCTS_TYPE.DECREMENT_PAGE })
 };
 
 export default ActionProducts;

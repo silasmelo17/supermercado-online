@@ -2,6 +2,9 @@
 import findAllProducts from "./findAllProducts";
 
 
-export default {
+
+const productsThunk = {
     findAllProducts
 };
+
+export default productsThunk;
