@@ -2,7 +2,7 @@
 import React from 'react';
 
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Switch,
   Route,
 } from 'react-router-dom';
@@ -14,7 +14,7 @@ import ProductsByName from './pages/ProductsByName';
 
 function Routes() {
     return(
-        <Router>
+        <BrowserRouter>
             <Switch>
                 <Route path="/products/name/:name">
                     <ProductsByName />
@@ -23,7 +23,7 @@ function Routes() {
                     <Products />
                 </Route>
             </Switch>
-        </Router>
+        </BrowserRouter>
     );
 }
 
