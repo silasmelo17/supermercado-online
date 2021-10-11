@@ -1,9 +1,11 @@
 
-import React, { useState } from 'react';
-
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
 import { FaUser, FaHeart, FaCartPlus, FaBars, FaSearch } from 'react-icons/fa'
+
+import Suggestions from '../Suggestions';
+
+import connector, { Props } from './connector';
 
 import { 
     HeaderContainer, HeaderNavigation, HeaderTitle, 
@@ -12,22 +14,19 @@ import {
 
 
 
-function Header() {
-    const history = useHistory();
 
-    console.log(history)
-
+function Header( { loadingSuggestions, clearSuggestions }: Props ) {
     const [ name, setName ] = useState<string>("");
 
 
+    useEffect( () => {
+        loadingSuggestions(name);
+    }, [name]);
 
     const onSubmitSearchProductName = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        console.log(history)
-
-        // const path = `/products/name/${name}`;
-        // history.push( path );
+        window.location.href=`/products/name/${name}`
     }
 
     return(
@@ -46,9 +45,14 @@ function Header() {
                         name="name" 
                         value={name}
                         placeholder="Digite o nome do produto" 
+
                         onChange={e => setName(e.target.value)} 
+                        onBlur={() => clearSuggestions() }
+                        onFocus={ () => loadingSuggestions(name) }
                     />
                     <FaSearch size={18} />
+
+                    <Suggestions />
                 </SearchProductContainer>
 
                 <ListIcons>
@@ -70,4 +74,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default connector(Header);
