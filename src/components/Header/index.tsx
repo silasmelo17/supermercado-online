@@ -1,28 +1,43 @@
 
 import React, { useState } from 'react';
 
+import { useHistory } from 'react-router-dom';
+
 import { FaUser, FaHeart, FaCartPlus, FaBars, FaSearch } from 'react-icons/fa'
 
-import { HeaderContainer, HeaderNavigation, HeaderTitle, IconContainer, ListIcons, SearchProduct, SearchProductContainer } from './styles'
+import { 
+    HeaderContainer, HeaderNavigation, HeaderTitle, 
+    IconContainer, ListIcons, SearchProduct, SearchProductContainer 
+} from './styles'
 
 
 
 function Header() {
+    const history = useHistory();
+
+    console.log(history)
+
     const [ name, setName ] = useState<string>("");
+
+
 
     const onSubmitSearchProductName = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        window.location.href = `/products/name/${name}`
-    }
 
+        console.log(history)
+
+        // const path = `/products/name/${name}`;
+        // history.push( path );
+    }
 
     return(
         <HeaderContainer>
             <HeaderNavigation>
-                <HeaderTitle>Supermercado</HeaderTitle>
+                <HeaderTitle>
+                    Supermercado
+                </HeaderTitle>
 
                 <SearchProductContainer 
-                    action="/products/name/" 
                     autoComplete="off" 
                     onSubmit={onSubmitSearchProductName} 
                 >
@@ -52,7 +67,7 @@ function Header() {
                 </ListIcons>
             </HeaderNavigation>
         </HeaderContainer>
-    )
+    );
 }
 
 export default Header;
