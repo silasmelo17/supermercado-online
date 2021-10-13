@@ -31,6 +31,7 @@ export const ProductName = styled.span`
     margin: 8px;
 `;
 
+
 export const BuyProduct = styled.button`
     background: #067BF9;
     color: white;
