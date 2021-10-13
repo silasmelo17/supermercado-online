@@ -4,9 +4,11 @@ import {
   BrowserRouter,
   Switch,
   Route,
+  Redirect
 } from 'react-router-dom';
 
 import Header from '../components/Header';
+import AccountFavorites from '../pages/AccountFavorites';
 
 import Products from '../pages/Products';
 import ProductsByCategory from '../pages/ProductsByCategory';
@@ -21,34 +23,36 @@ import connector, { Props } from './connector';
 function Routes( { auth, token, tokenAuthentication }: Props) {
     useEffect( () => {
         tokenAuthentication();
-    }, []);
+    }, [ tokenAuthentication ]);
 
     useEffect( () => {
-        if(auth)
-            localStorage.setItem( 'token', token );
-        else
-            localStorage.removeItem( 'token' )
-    }, [auth] );
+        auth 
+            ? localStorage.setItem( 'token', token )
+            : localStorage.removeItem( 'token' )
+    }, [auth, token] );
 
     return(
         <BrowserRouter>
             <Header />
 
             <Switch>
-                <Route path="/products/name/:name">
-                    <ProductsByName />
-                </Route>
-                <Route path="/products/category/:id">
-                    <ProductsByCategory />
-                </Route>
-                <Route path="/products">
+                <Route exact path="/">
                     <Products />
                 </Route>
-                <Route path="/signin">
-                    <SignIn />                    
+                <Route exact path="/signin">
+                    { auth ? <Redirect to="/" /> : <SignIn /> }
                 </Route>
-                <Route path="/register">
-                    <Register />                    
+                <Route exact path="/register">
+                    { auth ? <Redirect to="/" /> : <Register /> }                    
+                </Route>
+                <Route exact path="/products/name/:name">
+                    <ProductsByName />
+                </Route>
+                <Route exact path="/products/category/:id">
+                    <ProductsByCategory />
+                </Route>
+                <Route exact path="/account/favorites">
+                    { auth ? <AccountFavorites />: <Redirect to="/signin" />}
                 </Route>
             </Switch>
         </BrowserRouter>
