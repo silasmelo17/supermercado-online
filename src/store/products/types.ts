@@ -1,5 +1,6 @@
 
 export const SET_ALL_PRODUCTS = "@@products/set_all_products";
+export const UPDATE_PRODUCT = "@@products/update_products";
 
 export const SET_PAGE = "@@products/set_page";
 export const RESET_PAGE = "@@products/reset_page";
