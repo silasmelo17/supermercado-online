@@ -41,7 +41,7 @@ export const Input = styled.input<{ success?: boolean }>`
 
     box-shadow: ${ ({ success }) => 
         success === undefined 
-        ? ''
+        ? '0 0 0 0'
         : success 
             ? '0 0 5px green'
             : '0 0 5px red'
@@ -60,7 +60,7 @@ export const InputWithMask = styled(InputMask)<{ success?: boolean }>`
 
     box-shadow: ${ ({ success }) => 
         success === undefined 
-        ? 'none'
+        ? '0 0 0 0'
         : success 
             ? '0 0 5px green'
             : '0 0 5px red'

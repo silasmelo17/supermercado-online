@@ -19,7 +19,7 @@ function ListProducts(props: Props) {
     return(
         <ProductsContainer>
             { props.products.map( (product, i) => 
-                <Product key={`product___${i}`} {...product} /> ) }
+                <Product key={`product___${i}`} index={i} {...product} /> ) }
         </ProductsContainer>
     );
 }
