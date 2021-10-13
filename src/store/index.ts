@@ -11,4 +11,6 @@ const store = createStore(
     applyMiddleware(reduxThunk)
 );
 
+console.log(store.getState());
+
 export default store;
