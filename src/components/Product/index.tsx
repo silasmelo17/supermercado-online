@@ -1,19 +1,34 @@
 
+import axios from '../../config/axios.config';
+import { AxiosError, AxiosResponse } from 'axios';
+
 import { Link } from 'react-router-dom';
 
-import TypeProduct from '../../types/Product';
+import connector, { Props } from './connector';
 
 import { 
     BuyProduct, ProductContainer, ImageContainer, ProductImage, ProductName, 
-    FavoriteProduct, FavoriteIcon 
-} from './style';
+    FavoriteProduct, FavoriteIcon
+} from './styles';
 
 
 
-function Product( { id, name, price, image_src, favorite }: TypeProduct) {
+function Product( { token, index, id, name, price, image_src, favorite, updateProduct }: Props) {
+    
+    const onClickFavoritedProduct = async () => {
+        const result: AxiosResponse<any> = await axios.post<any, any>( `/favorites/product/${id}`, {}, { headers: {token}} )
+            .catch( (err: AxiosError) => {} );
+
+        if(result.status === 201 ) {
+            updateProduct( index, { id, favorite: true });
+        } else if( result.status === 200 ) {
+            updateProduct( index, { id, favorite: false });
+        }
+    }
+
     return(
         <ProductContainer>
-            <FavoriteProduct>
+            <FavoriteProduct onClick={onClickFavoritedProduct} >
                 <FavoriteIcon favorite={favorite} />
             </FavoriteProduct>
 
@@ -38,4 +53,4 @@ function Product( { id, name, price, image_src, favorite }: TypeProduct) {
     )
 }
 
-export default Product;
+export default connector(Product);
