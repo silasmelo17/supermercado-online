@@ -58,9 +58,19 @@ export const ListIcons = styled.ul`
 `;
 
 export const IconContainer = styled.li`
+    display: flex ;
+    align-items: center;
+    justify-content: center;
+
     cursor: pointer;
 
     & + & {
         margin-left: 16px;
     }
 `;
+
+
+export const Username = styled.span`
+    font-size: 12px;
+    margin-left: 8px;
+`

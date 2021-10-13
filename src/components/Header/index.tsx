@@ -1,7 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { FaUser, FaHeart, FaCartPlus, FaBars, FaSearch } from 'react-icons/fa'
+import { Link } from 'react-router-dom';
+
+import { FaUser, FaHeart, FaCartPlus, FaBars, FaSearch } from 'react-icons/fa';
 
 import Suggestions from '../Suggestions';
 
@@ -9,15 +11,22 @@ import connector, { Props } from './connector';
 
 import { 
     HeaderContainer, HeaderNavigation, HeaderTitle, 
-    IconContainer, ListIcons, SearchProduct, SearchProductContainer 
+    IconContainer, ListIcons, SearchProduct, SearchProductContainer,
+    Username
 } from './styles'
 
 
 
 
-function Header( { loadingSuggestions, clearSuggestions }: Props ) {
+function Header( { auth, user, loadingSuggestions, clearSuggestions }: Props ) {
     const [ name, setName ] = useState<string>("");
 
+
+    const useDebounce = (
+        fn: (...args:any[]) => void, 
+        wait:number=500, 
+        time: NodeJS.Timeout 
+    ) => (...args:any[]) => clearTimeout(time, time = setTimeout( () => fn(...args), wait) )
 
     useEffect( () => {
         if(name.length >= 3)
@@ -33,9 +42,12 @@ function Header( { loadingSuggestions, clearSuggestions }: Props ) {
     return(
         <HeaderContainer>
             <HeaderNavigation>
-                <HeaderTitle>
-                    Supermercado
-                </HeaderTitle>
+                <Link to="/">
+                    <HeaderTitle>
+                        Supermercado
+                    </HeaderTitle>
+                </Link>
+
 
                 <SearchProductContainer 
                     autoComplete="off" 
@@ -58,10 +70,17 @@ function Header( { loadingSuggestions, clearSuggestions }: Props ) {
 
                 <ListIcons>
                     <IconContainer>
-                        <FaUser size={18} />
+                        <Link to='/account'>
+                            <FaUser size={18} />
+                        </Link>
+                        { auth && <Username>
+                            Olá, {user?.name}
+                        </Username>}
                     </IconContainer>
                     <IconContainer>
-                        <FaHeart size={18} />
+                        <Link to="/account/favorites">
+                            <FaHeart size={18} />
+                        </Link>
                     </IconContainer>
                     <IconContainer>
                         <FaCartPlus size={18} />
