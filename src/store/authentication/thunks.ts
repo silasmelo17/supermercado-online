@@ -11,31 +11,22 @@ import AxiosResponseAuthentication from '../../types/AxiosResponseAuthentication
 
 
 
-interface AxiosRequestAuthentication {
-    headers: {
-        token: string
-    },
-    data: {
-        email: string,
-        password: string
-    }
-}
-
-
 export const userAuthentication = ( email: string, password: string ) => 
-    async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState ) => {
-        const { token } = getState().authentication;
-
-        const { status, data } = await axios.post<AxiosRequestAuthentication, AxiosResponseAuthentication >(`/user/signin/`,{
-            headers: { token },
-            data: {
-                email, password
-            }   
-        });
-
-        console.log(status, data)
+    async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>) => {
         
+        const { data } = await axios.post<any, AxiosResponseAuthentication >(`/user/signin/`,
+            { email, password }
+        );
 
         dispatch( ActionsAuthentication.userAuthentication( data.auth, data.token ) );
     }
 
+export const userTokenAuthentication = () => 
+    async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState ) => {
+        const { token } = getState().authentication;
+            
+        const { data } = await axios
+            .post<any, AxiosResponseAuthentication >(`/user/logged/`, {}, {headers: { token }} );
+
+        dispatch( ActionsAuthentication.tokenAuthentication( data.auth, data.user ) );
+    }
