@@ -13,7 +13,7 @@ import {
 } from '../../components/Forms/styles';
 
 import { ValidationStep } from './styles';
-import { Axios, AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
 
 
@@ -34,6 +34,7 @@ function Register({ auth }: Props) {
     const [ successLastName, setSuccessLastName ] = useState<boolean | undefined>();
     const [ successCPF, setSuccessCPF ] = useState<boolean | undefined>();
     const [ successPhone, setSuccessPhone ] = useState<boolean | undefined>();
+    const [ successBirthday, setSuccessBirthday ] = useState<boolean | undefined>();
     const [ successEmail, setSuccessEmail ] = useState<boolean | undefined>();
     const [ successConfirmEmail, setSuccessConfirmEmail ] = useState<boolean | undefined>();
     const [ successPassword, setSuccessPassword ] = useState<boolean | undefined>();
@@ -47,9 +48,16 @@ function Register({ auth }: Props) {
 
     const [ disabledButton, setDisabledButton ] = useState<boolean>(false);
 
-    const successesStates = [ successName, successLastName, successCPF, successPhone, successEmail, successConfirmEmail, successPassword, successConfirmPassword]
+    const successesStates = [ successName, successLastName, successCPF, successPhone, successBirthday, successEmail, successConfirmEmail, successPassword, successConfirmPassword]
 
 
+
+    useEffect( () => {
+        if(auth)
+            window.location.href="/"
+    }, [auth])
+
+    
 
     const onSubmitRegister = (event: FormEvent) => {
         event.preventDefault();
@@ -73,37 +81,60 @@ function Register({ auth }: Props) {
                 const responseError = err.response;
 
                 setMessageError( responseError?.data.message );
-            })
-
-            console.log(result);
+            });
         })();
     }
 
 
 
-    useEffect( () => setSuccessName( () => {
+    const onBlurSuccessName = () => setSuccessName( () => {
         return name.length === 0 
             ? undefined
             : name.length > 1
-    }), [name]);
+    });
 
-    useEffect( () => setSuccessLastName( () => {
+    const onBlurSuccessLastName = () => setSuccessLastName( () => {
         return last_name.length === 0 
             ? undefined
             : last_name.length > 2
-    }), [last_name]);
+    });
 
-    useEffect( () => setSuccessCPF( () => {
+    const onBlurSuccessCPF = () => setSuccessCPF( () => {
         return cpf.length === 0 
             ? undefined 
             : cpf.replaceAll(/[^0-9]/g, '').length === 11
-    }), [cpf] );
+    });
 
-    useEffect( () => setSuccessPhone( () => {
+    const onBlurSuccessPhone = () => setSuccessPhone( () => {
         return phone.length === 0 
             ? undefined 
             : phone.replaceAll(/[^0-9]/g, '').length === 11
-    }), [phone] );
+    });
+
+    const onBlurSuccessBirthday = () => {
+        const date = new Date(birthday);
+        const current = new Date();
+
+        const year = current.getFullYear() - date.getFullYear();
+        const month = current.getMonth() - date.getMonth();
+        const day = current.getDay() - date.getDay();
+
+        const difference = new Date( 
+            current.getFullYear() - year, 
+            current.getMonth() - month, 
+            current.getDay() - day
+        );
+
+        setSuccessBirthday( () => (current.getFullYear() - difference.getFullYear()) >= 18 )
+    };
+
+    const onBlurSuccessPassword = () => setSuccessEmail( () => {
+        return email.length === 0
+            ? undefined
+            : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    });
+
+
 
     useEffect( () => setSuccessPassword( () => {
         return password.length === 0 
@@ -116,12 +147,6 @@ function Register({ auth }: Props) {
             ? undefined
             : password === confirmPassword 
     }), [confirmPassword, password]);
-
-    useEffect( () => setSuccessEmail( () => {
-        return email.length === 0
-            ? undefined
-            : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-    }), [email]);
 
     useEffect( () => setSuccessConfirmEmail( () => {
         return confirmEmail.length === 0 
@@ -141,11 +166,12 @@ function Register({ auth }: Props) {
         const someError = successesStates.filter( s => (s === undefined || s === false) );
 
         setDisabledButton( someError.length !== 0 );
-    }, successesStates );
+    }, [ successesStates ]);
 
 
-    return(
-        <Form onSubmit={onSubmitRegister} autoComplete="off" >
+
+    return(<>
+        { auth === false && <Form onSubmit={onSubmitRegister} autoComplete="off" >
             <ColumnContainer>
                 <Label>Nome</Label>
                 <Input 
@@ -153,6 +179,7 @@ function Register({ auth }: Props) {
                     value={name}
                     success={successName}
                     onChange={ e => setName(e.target.value)}
+                    onBlur={onBlurSuccessName}
                     placeholder="Informe seu nome"
                 />
             </ColumnContainer>
@@ -164,6 +191,7 @@ function Register({ auth }: Props) {
                     value={last_name}
                     success={successLastName}
                     onChange={ e => setLastName(e.target.value)}
+                    onBlur={onBlurSuccessLastName}
                     placeholder="Informe seu sobrenome"
                 />
             </ColumnContainer>
@@ -176,6 +204,7 @@ function Register({ auth }: Props) {
                     success={successCPF}
                     value={cpf}
                     onChange={ e => setCpf(e.target.value)}
+                    onBlur={onBlurSuccessCPF}
                     placeholder="Informe seu CPF"
                 />
             </ColumnContainer>
@@ -188,6 +217,7 @@ function Register({ auth }: Props) {
                     success={successPhone}
                     value={phone}
                     onChange={ e => setPhone(e.target.value)}
+                    onBlur={onBlurSuccessPhone}
                     placeholder="Informe seu telefone"
                 />
             </ColumnContainer>
@@ -196,9 +226,10 @@ function Register({ auth }: Props) {
                 <Label>Data de nascimento</Label>
                 <Input 
                     type="date"
-                    success={successPhone}
+                    success={successBirthday}
                     value={birthday}
                     onChange={ e => setBirthday(e.target.value)}
+                    onBlur={onBlurSuccessBirthday}
                 />
             </ColumnContainer>
 
@@ -222,6 +253,7 @@ function Register({ auth }: Props) {
                     value={confirmEmail}
                     onChange={ e => setConfirmEmail(e.target.value)}
                     onPaste={e => e.preventDefault()}
+                    onBlur={onBlurSuccessPassword}
                     placeholder="Confirme seu email"
                 />
             </ColumnContainer>
@@ -268,8 +300,8 @@ function Register({ auth }: Props) {
                     Cadastrar
                 </ButtonHighlight>
             </Container>
-        </Form>
-    );
+        </Form>}
+    </>);
 }
 
 export default connector(Register);

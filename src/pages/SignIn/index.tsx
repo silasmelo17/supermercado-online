@@ -16,7 +16,7 @@ function SignIn({ auth, signInUser }: Props) {
     useEffect( () => {
         if(auth)
             window.location.href = '/';
-    }, []);
+    }, [auth]);
 
 
     const onClickSignIn = () => {

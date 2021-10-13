@@ -11,13 +11,13 @@ import connector, { Props } from './connector';
 
 function ProductsByName({ match, page, limit, count, term, findProductsByName, resetPage }: Props ) {
 
-    useEffect( () => resetPage(), [] );
+    useEffect( () => resetPage(), [resetPage] );
 
     useEffect( () => {
         const { name } = match.params;
 
         findProductsByName(name);
-    }, [page, limit]);
+    }, [page, limit, findProductsByName, match.params]);
 
 
     return(
