@@ -19,10 +19,13 @@ interface ActionAuthentication extends Action {
 function authenticationReducer( state:Authentication = INITIAL_AUTH_STATE, action: ActionAuthentication ) {
     switch(action.type){
         case AuthenticationTypes.SET_AUTHENTICATION:
+            localStorage.setItem('token' , action.token);
+
             return {
                 ...state,
                 auth: action.auth,
-                token: action.token
+                token: action.token,
+                user: action?.user
             }
         case AuthenticationTypes.SET_USER_AUTHENTICATION:
             return {
