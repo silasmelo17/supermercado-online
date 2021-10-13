@@ -1,6 +1,8 @@
 
 import styled from 'styled-components';
 
+import InputMask from 'react-input-mask';
+
 
 
 export const Form = styled.form`
@@ -18,20 +20,55 @@ export const Form = styled.form`
     background: white;
 `;
 
-export const ColumnContainer = styled.div`
+export const Container = styled.div`
     display: flex;
-    flex-direction: column;
 
     & + & {
         margin-top: 20px;
     }
 `;
 
-export const Input = styled.input`
+export const ColumnContainer = styled(Container)`
+    flex-direction: column;
+`;
+
+
+export const Input = styled.input<{ success?: boolean }>`
     border: 1px solid #ccc;
     cursor: pointer;
     font-size: 18px;
     padding: 8px 12px;
+
+    box-shadow: ${ ({ success }) => 
+        success === undefined 
+        ? ''
+        : success 
+            ? '0 0 5px green'
+            : '0 0 5px red'
+    };
+
+    &:focus {
+        box-shadow: 0 0 5px #067BF9;
+    }
+`;
+
+export const InputWithMask = styled(InputMask)<{ success?: boolean }>`
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px 12px;
+
+    box-shadow: ${ ({ success }) => 
+        success === undefined 
+        ? 'none'
+        : success 
+            ? '0 0 5px green'
+            : '0 0 5px red'
+    };
+
+    &:focus {
+        box-shadow: 0 0 5px #067BF9;
+    }
 `;
 
 export const Label = styled.label`
@@ -39,15 +76,17 @@ export const Label = styled.label`
     font-size: 18px;
 `;
 
-
 export const Button = styled.button`
+    flex: 1;
+    color: #333;
+
     font-size: 18px;
     padding: 10px 18px;
     cursor: pointer;
+    border-radius: 4px;
 `;
 
-
 export const ButtonHighlight = styled(Button)`
-    background: #067BF9;
+    background: ${ ({ disabled }) => disabled ? '#ccc': '#067BF9' };
     color: white;
 `;
