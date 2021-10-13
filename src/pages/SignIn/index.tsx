@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { ButtonHighlight, Form, Input, ColumnContainer, Label } from '../../components/Forms/styles';
 import { UserIcon, UserIconContainer, ForgetPassoword } from './styles';
@@ -8,10 +8,15 @@ import connector, { Props } from './connector';
 
 
 
-function SignIn({ signInUser }: Props) {
+function SignIn({ auth, signInUser }: Props) {
     const [ email, setEmail ] = useState<string>('');
     const [ password, setPassword ] = useState<string>('');
 
+
+    useEffect( () => {
+        if(auth)
+            window.location.href = '/';
+    }, []);
 
 
     const onClickSignIn = () => {
@@ -19,7 +24,7 @@ function SignIn({ signInUser }: Props) {
     }
 
     return(
-        <Form>
+        <Form onSubmit={e => e.preventDefault() }>
             <UserIconContainer>
                 <UserIcon size={130} />
             </UserIconContainer>
