@@ -14,7 +14,6 @@ export const SuggestionContainer = styled.ul`
     width: 100%;
     min-width: 400px;
     background: white;
-    border: 1px solid #efefef;
     z-index: 10;
 `;
 

@@ -19,6 +19,18 @@ const global = createGlobalStyle`
         list-style: none;   
     }
 
+    h1 {
+        font-size: 32px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    h3 {
+        font-size: 22px;
+    }
+
     body {
         font-family: "Questrial", Arial;
         font-size: 16px;
@@ -29,7 +41,7 @@ const global = createGlobalStyle`
         max-width: 1200px;
         width: 100%;
 
-        margin: 80px auto;
+        margin: 140px auto;
         background: white;
         padding: 20px;
 

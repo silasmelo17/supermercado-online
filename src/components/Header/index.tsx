@@ -12,15 +12,19 @@ import connector, { Props } from './connector';
 import { 
     HeaderContainer, HeaderNavigation, HeaderTitle, 
     IconContainer, ListIcons, SearchProduct, SearchProductContainer,
-    Username, DropDown
+    TransparentButton
 } from './styles'
 
+import DropDown from '../DropDown';
+import DropDownAuthentication from '../DropDown/DropDownAuthenticated';
 
 
 
-function Header( { auth, user, loadingSuggestions, clearSuggestions }: Props ) {
-    
+function Header( { auth, view, loadingSuggestions, clearSuggestions }: Props ) {
     const [ name, setName ] = useState<string>("");
+    const [ visible, setVisible ] = useState<boolean>(false);
+
+
 
     useEffect( () => {
         if(name.length >= 3)
@@ -42,7 +46,7 @@ function Header( { auth, user, loadingSuggestions, clearSuggestions }: Props ) {
                     </HeaderTitle>
                 </Link>
 
-                <SearchProductContainer 
+                { (view === true || view === undefined ) && <SearchProductContainer 
                     autoComplete="off" 
                     onSubmit={onSubmitSearchProductName} 
                 >
@@ -56,36 +60,40 @@ function Header( { auth, user, loadingSuggestions, clearSuggestions }: Props ) {
                         onBlur={() => clearSuggestions() }
                         onFocus={ () => loadingSuggestions(name) }
                     />
-                    <FaSearch size={18} />
+                    <TransparentButton>
+                        <FaSearch size={18} color="white" />
+                    </TransparentButton>
 
                     <Suggestions />
-                </SearchProductContainer>
+                </SearchProductContainer>}
 
-                <ListIcons>
+                { (view === true || view === undefined ) && <ListIcons>
                     <IconContainer>
                         <Link to='/account'>
-                            <FaUser size={18} />
+                            <FaUser size={18} 
+                                onMouseEnter={ () => setVisible(true) }
+                                onMouseLeave={ () => setTimeout( () => setVisible(false), 250) }
+                            />
                         </Link>
-                        { auth && <Username>
-                            Olá, {user?.name}
-                        </Username>}
 
-                        { auth && <DropDown>
-
-                        </DropDown>}
+                        { auth && <DropDownAuthentication visible={visible} /> }
+                        { auth === false && <DropDown visible={visible} /> }
                     </IconContainer>
-                    <IconContainer>
+
+                    { auth && <IconContainer>
                         <Link to="/account/favorites">
                             <FaHeart size={18} />
                         </Link>
-                    </IconContainer>
-                    <IconContainer>
+                    </IconContainer>}
+
+                    { auth && <IconContainer>
                         <FaCartPlus size={18} />
-                    </IconContainer>
+                    </IconContainer>}
+
                     <IconContainer>
                         <FaBars size={18} />
                     </IconContainer>
-                </ListIcons>
+                </ListIcons>}
             </HeaderNavigation>
         </HeaderContainer>
     );

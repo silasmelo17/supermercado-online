@@ -1,4 +1,6 @@
 
+import { FaCartPlus } from 'react-icons/fa';
+
 import axios from '../../config/axios.config';
 import { AxiosError, AxiosResponse } from 'axios';
 
@@ -13,7 +15,7 @@ import {
 
 
 
-function Product( { token, index, id, name, price, image_src, favorite, updateProduct }: Props) {
+function Product( { token, auth, index, id, name, price, image_src, favorite, updateProduct }: Props) {
     
     const onClickFavoritedProduct = async () => {
         const result: AxiosResponse<any> = await axios.post<any, any>( `/favorites/product/${id}`, {}, { headers: {token}} )
@@ -28,9 +30,9 @@ function Product( { token, index, id, name, price, image_src, favorite, updatePr
 
     return(
         <ProductContainer>
-            <FavoriteProduct onClick={onClickFavoritedProduct} >
+            {auth && <FavoriteProduct onClick={onClickFavoritedProduct} >
                 <FavoriteIcon favorite={favorite} />
-            </FavoriteProduct>
+            </FavoriteProduct>}
 
             <Link to={`/products/${id}`}>
                 <ImageContainer>
@@ -48,7 +50,10 @@ function Product( { token, index, id, name, price, image_src, favorite, updatePr
                 }).format(price || 0)}
             </span>
 
-            <BuyProduct>Adicionar</BuyProduct>
+            <BuyProduct>
+                <FaCartPlus style={{ marginRight: 8 }} />
+                Adicionar
+            </BuyProduct>
         </ProductContainer>
     )
 }

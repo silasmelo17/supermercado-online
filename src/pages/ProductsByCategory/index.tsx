@@ -2,14 +2,13 @@
 import { useEffect } from 'react';
 import { withRouter } from 'react-router';
 
-import ListProducts from "../../components/ListProducts";
-import Pagination from "../../components/Pagination";
+import TemplateProducts from '../../templates/TemplateProducts';
 
 import connector, { Props } from "./connector";
 
 
 
-function ProductsByCategory( { count, match, loadProducts }: Props ) {
+function ProductsByCategory( { match, loadProducts }: Props ) {
     
     useEffect( () => {
         const { id } = match.params;
@@ -17,13 +16,9 @@ function ProductsByCategory( { count, match, loadProducts }: Props ) {
     }, [loadProducts, match.params ]);
 
     return(
-        <main>
-            <h2>Lista de produtos</h2>
-            <span>{count} produtos encontrados.</span>
-
-            <ListProducts />
-            <Pagination buttons={7} />
-        </main>
+        <TemplateProducts>
+            Lista de produtos da categoria {match.params.id}
+        </TemplateProducts>
     );
 }
 

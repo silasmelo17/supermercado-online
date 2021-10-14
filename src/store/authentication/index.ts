@@ -14,6 +14,7 @@ interface ActionAuthentication extends Action {
     auth: boolean,
     token: string,
     user?: User,
+    loading?: boolean
 }
 
 function authenticationReducer( state:Authentication = INITIAL_AUTH_STATE, action: ActionAuthentication ) {
@@ -32,6 +33,18 @@ function authenticationReducer( state:Authentication = INITIAL_AUTH_STATE, actio
                 ...state,
                 auth: action.auth,
                 user: action.user
+            }
+        case AuthenticationTypes.SIGNOUT_AUTHENTICATION:
+            return {
+                ...state,
+                auth: action.auth,
+                token: action.token,
+                user: undefined
+            }
+        case AuthenticationTypes.SET_LOADING_AUTHENTICATION:
+            return {
+                ...state,
+                loading: action.loading
             }
         default: 
             return state;

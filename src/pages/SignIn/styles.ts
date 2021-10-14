@@ -23,7 +23,15 @@ export const UserIcon = styled(FaUser)`
     color: #efefef;
 `;
 
-export const ForgetPassoword = styled(Link)`
-    margin-left: auto;
+export const RightText = styled.span`
+    margin: 4px 0 4px auto;
+`
+
+export const RightLink = styled(Link)`
+    margin: 4px 0 4px auto;
+
+    &:hover {
+        color: #067BF9;
+    }
 `
 

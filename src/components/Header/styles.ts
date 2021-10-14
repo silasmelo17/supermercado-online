@@ -4,13 +4,21 @@ import styled from 'styled-components';
 
 
 export const HeaderContainer = styled.header`
+    position: fixed;
+    top: 0;
+    left: 0;
+
     display: flex;
     align-items: center;
 
     background: #f13d4c;
     color: white;
+
+    width: 100%;
     height: 60px;
     padding: 0 20px;
+
+    z-index: 999;
 `;
 
 export const HeaderNavigation = styled.nav`
@@ -57,6 +65,10 @@ export const ListIcons = styled.ul`
     font-size: 20px;
 `;
 
+export const TransparentButton = styled.button`
+    background: transparent;
+`;
+
 export const IconContainer = styled.li`
     position: relative;
     display: flex ;
@@ -72,11 +84,6 @@ export const IconContainer = styled.li`
 
 
 export const Username = styled.span`
-    font-size: 12px;
+    font-size: 14px;
     margin-left: 8px;
-`
-
-
-export const DropDown = styled.span`
-    
 `

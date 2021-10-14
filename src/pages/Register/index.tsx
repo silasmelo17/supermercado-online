@@ -6,6 +6,8 @@ import axios from '../../config/axios.config';
 
 import connector, { Props } from "./connector";
 
+import Header from '../../components/Header';
+
 import { 
     Form,
     Label, Input, InputWithMask,
@@ -20,7 +22,7 @@ import User from '../../types/User';
 
 
 
-function Register({ auth }: Props) {
+function Register({ auth, ocultHeader }: Props) {
     const [ name, setName ] = useState<string>('');
     const [ last_name, setLastName ] = useState<string>('');
     const [ cpf, setCpf ] = useState<string>('');
@@ -31,7 +33,7 @@ function Register({ auth }: Props) {
     const [ password, setPassword ] = useState<string>('');
     const [ confirmPassword, setConfirmPassword ] = useState<string>('');
 
-    const [ messageError, setMessageError ] = useState<string>('');
+    const [ message, setMessage ] = useState<string>('');
 
     const [ successName, setSuccessName ] = useState<boolean | undefined>();
     const [ successLastName, setSuccessLastName ] = useState<boolean | undefined>();
@@ -52,11 +54,7 @@ function Register({ auth }: Props) {
     const [ disabledButton, setDisabledButton ] = useState<boolean>(false);
 
 
-
-    useEffect( () => {
-        if(auth)
-            window.location.href="/"
-    }, [auth])
+    useEffect( () => { ocultHeader() }, [ocultHeader]);
 
     
 
@@ -74,13 +72,13 @@ function Register({ auth }: Props) {
         })
         .then( (response) => {
             if(response.status === 201) {
-                window.location.href = "/signin";
+                setMessage('Usuário cadastrado com sucesso.');
             }
         })
         .catch( (err: AxiosError<any>) => {
             const responseError = err.response;
 
-            setMessageError( responseError?.data.message );
+            setMessage( responseError?.data.message );
         });
     }
 
@@ -181,7 +179,8 @@ function Register({ auth }: Props) {
 
 
     return(<>
-        { auth === false && <Form onSubmit={onSubmitRegister} autoComplete="off" >
+        <Header />
+        <Form onSubmit={onSubmitRegister} autoComplete="off" >
             <ColumnContainer>
                 <Label>Nome</Label>
                 <Input 
@@ -306,8 +305,8 @@ function Register({ auth }: Props) {
                 </Link>
             </Container>
 
-            { messageError !== '' && <Container>
-                <span>{messageError}</span>
+            { message !== '' && <Container>
+                <span>{message}</span>
             </Container>}
 
             <Container style={{ marginTop: 60 }}>
@@ -316,7 +315,7 @@ function Register({ auth }: Props) {
                     Cadastrar
                 </ButtonHighlight>
             </Container>
-        </Form>}
+        </Form>
     </>);
 }
 

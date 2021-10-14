@@ -24,6 +24,7 @@ export const ImageContainer = styled.figure`
 export const ProductImage = styled.img`
     width: 224px;
     height: 224px;
+    background: white;
 `;
 
 export const ProductName = styled.span`
@@ -33,6 +34,10 @@ export const ProductName = styled.span`
 
 
 export const BuyProduct = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background: #067BF9;
     color: white;
     padding: 8px 16px;

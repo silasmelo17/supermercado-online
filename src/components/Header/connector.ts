@@ -9,7 +9,8 @@ import GlobalState from '../../types/GlobalState';
 
 const mapStateToProps = (state: GlobalState) => ({
     auth: state.authentication.auth,
-    user: state.account?.user
+    user: state.account?.user,
+    view: state.header.view,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

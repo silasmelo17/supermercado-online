@@ -11,7 +11,7 @@ export const Form = styled.form`
 
     width: 100%;
     max-width: 500px;
-    margin: 80px auto;
+    margin: 140px auto;
     padding: 80px 60px;
 
     border-radius: 4px;
@@ -22,10 +22,7 @@ export const Form = styled.form`
 
 export const Container = styled.div`
     display: flex;
-
-    & + & {
-        margin-top: 20px;
-    }
+    margin: 10px 0;
 `;
 
 export const ColumnContainer = styled(Container)`

@@ -1,14 +1,19 @@
 
 import { connect, ConnectedProps } from 'react-redux';
+import { setHeaderView } from '../../store/header/actions';
 import GlobalState from '../../types/GlobalState';
 
 
 
 const mapStateToProps = (state: GlobalState) => ({ 
-    auth: state.authentication.auth
+    auth: state.authentication.auth,
 });
 
-const connector = connect( mapStateToProps );
+const mapDispathToProps = (dispatch: any) => ({
+    ocultHeader: () => dispatch(setHeaderView(false))
+})
+
+const connector = connect( mapStateToProps, mapDispathToProps );
 
 
 

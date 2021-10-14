@@ -7,7 +7,6 @@ import {
   Redirect
 } from 'react-router-dom';
 
-import Header from '../components/Header';
 import AccountFavorites from '../pages/AccountFavorites';
 
 import Products from '../pages/Products';
@@ -15,12 +14,13 @@ import ProductsByCategory from '../pages/ProductsByCategory';
 import ProductsByName from '../pages/ProductsByName';
 import Register from '../pages/Register';
 import SignIn from '../pages/SignIn';
+import Account from '../pages/Account';
 
 import connector, { Props } from './connector';
 
 
 
-function Routes( { auth, token, tokenAuthentication }: Props) {
+function Routes( { auth, loading, token, tokenAuthentication }: Props) {
     useEffect( () => {
         tokenAuthentication();
     }, [ tokenAuthentication ]);
@@ -31,10 +31,8 @@ function Routes( { auth, token, tokenAuthentication }: Props) {
             : localStorage.removeItem( 'token' )
     }, [auth, token] );
 
-    return(
-        <BrowserRouter>
-            <Header />
-
+    return(<>
+        { loading === false && <BrowserRouter>
             <Switch>
                 <Route exact path="/">
                     <Products />
@@ -51,12 +49,16 @@ function Routes( { auth, token, tokenAuthentication }: Props) {
                 <Route exact path="/products/category/:id">
                     <ProductsByCategory />
                 </Route>
+                
+                <Route exact path="/account">
+                    { auth ? <Account />: <Redirect to="/signin" /> }
+                </Route>
                 <Route exact path="/account/favorites">
                     { auth ? <AccountFavorites />: <Redirect to="/signin" />}
                 </Route>
             </Switch>
-        </BrowserRouter>
-    );
+        </BrowserRouter>}
+    </>);
 }
 
 export default connector(Routes);

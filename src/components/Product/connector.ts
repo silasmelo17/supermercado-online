@@ -9,7 +9,8 @@ import ProductsAction from '../../store/products/actions/';
 
 
 const mapStateToProps = (state: GlobalState) => ({
-    token: state.authentication.token
+    token: state.authentication.token,
+    auth: state.authentication.auth
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

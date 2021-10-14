@@ -8,12 +8,12 @@ export const ListProductContainer = styled.section`
     flex-direction: column;
     justify-content: center;
     margin-top: 28px;
-`
+`;
 
-export const Container = styled.div`
+export const ProductContainerColumn = styled.div`
     display: flex;
     align-items: center;
-`
+`;
 
 export const ProductContainer = styled.article`
     display: flex;
@@ -31,11 +31,12 @@ export const ProductContainer = styled.article`
 export const ProductImage = styled.img`
     width: 70px;
     height: 70px;
-`
+`;
 
 export const ProductName = styled.span`
     margin-left: 12px;
-`
+    max-width: 600px;
+`;
 
 export const Remove = styled.button`
     padding: 8px 16px;
@@ -65,4 +66,10 @@ export const IncrementFavorites = styled.button`
     &:disabled {
         background: #ccc;
     }
-`
+`;
+
+export const WishlistEmpty = styled.h3`
+    margin: 20px;
+    text-align: center;
+    color: #bbb;
+`;

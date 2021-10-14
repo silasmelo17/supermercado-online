@@ -8,7 +8,8 @@ import Product from '../../types/Product';
 
 
 interface ActionHeader extends Action {
-    suggestions: Product[]
+    suggestions: Product[],
+    view?: boolean
 }
 
 function headerReducer( state = INITIAL_HEADER_STATE , action: ActionHeader) {
@@ -22,6 +23,11 @@ function headerReducer( state = INITIAL_HEADER_STATE , action: ActionHeader) {
             return {
                 ...state,
                 suggestions: []
+            }
+        case HEADER_TYPES.SET_HEADER_VIEW:
+            return {
+                ...state,
+                view: action?.view
             }
         default:
             return state;

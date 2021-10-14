@@ -13,3 +13,8 @@ export const setSuggestions = ( suggestions: Product[] ) => ({
 export const clearSuggestions = () => ({
     type: HEADER_TYPES.CLEAR_SUGGESTIONS
 });
+
+export const setHeaderView = (view: boolean) => ({
+    type: HEADER_TYPES.SET_HEADER_VIEW,
+    view
+});

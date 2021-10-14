@@ -9,7 +9,7 @@ export const setUser = ( user: User ) => {
         type: AccountTypes.SET_USER,
         name: user.name,
         cpf: user.cpf,
-        lastName: user.lastName,
+        last_name: user.last_name,
         email: user.email,
         birthday: user.birthday,
         phone: user.phone

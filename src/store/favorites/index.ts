@@ -13,8 +13,6 @@ type FavoritesAction = Action & Favorites & Favorite;
 
 
 function favoriteReducer( state: Favorites = INITIAL_ACCOUNT_FAVORITES, action: FavoritesAction) {
-    console.log(action);
-   
     switch(action.type) {
         case FavoritesTypes.RESET_FAVORITES:
             return {

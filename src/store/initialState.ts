@@ -11,7 +11,8 @@ import Favorites from '../types/Favorites';
 
 export const INITIAL_AUTH_STATE: Authentication = {
     auth: false,
-    token: localStorage.getItem('token') || ''
+    token: localStorage.getItem('token') || '',
+    loading: false
 }
 
 export const INITIAL_PRODUCTS_STATE: Products = {
@@ -39,7 +40,8 @@ export const INITIAL_ACCOUNT_STATE: Account = {
 
 
 export const INITIAL_HEADER_STATE: Header = {
-    suggestions: []
+    suggestions: [],
+    view: true
 }
 
 

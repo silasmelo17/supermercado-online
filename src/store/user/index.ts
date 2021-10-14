@@ -16,7 +16,7 @@ function userReducer( state: User = INITIAL_ACCOUNT_USER, action: ActionUser  ) 
                 ...state,
                 name: action.name,
                 cpf: action.cpf,
-                lastName: action.lastName,
+                last_name: action.last_name,
                 email: action.email,
                 birthday: action.birthday,
                 phone: action.phone

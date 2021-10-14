@@ -2,16 +2,14 @@
 import { useEffect } from 'react';
 
 import { withRouter } from 'react-router';
-import ListProducts from '../../components/ListProducts';
-import Pagination from '../../components/Pagination';
+
+import TemplateProducts from '../../templates/TemplateProducts';
 
 import connector, { Props } from './connector';
 
 
 
-function ProductsByName({ match, page, limit, count, term, findProductsByName, resetPage }: Props ) {
-
-    useEffect( () => resetPage(), [resetPage] );
+function ProductsByName({ match, page, limit, term, findProductsByName }: Props ) {
 
     useEffect( () => {
         const { name } = match.params;
@@ -21,13 +19,9 @@ function ProductsByName({ match, page, limit, count, term, findProductsByName, r
 
 
     return(
-        <main>
-            <h1>Produtos com o termo {`"${term}"`}</h1>
-            <span>{count} produtos encontrados.</span>
-
-            <ListProducts />
-            <Pagination buttons={7} />
-        </main>     
+        <TemplateProducts>
+            Produtos com o termo {`"${term}"`}.
+        </TemplateProducts>     
     );
 }
 

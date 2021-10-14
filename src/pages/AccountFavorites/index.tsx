@@ -1,57 +1,77 @@
 
 import { useEffect } from "react";
-import { FaPlus, FaTrash } from "react-icons/fa";
+import { FaPlus, FaTrash, FaCartPlus } from "react-icons/fa";
+
+import TemplatePage from "../../templates/PageTemplate";
+
+import AccountMenu from "../../components/AccountMenu";
+import { Container } from "../../components/Main";
 import { BuyProduct } from "../../components/Product/styles";
+
+import Product from "../../types/Product";
+
 import connector, { Props } from "./connector";
 
 import { 
-    Container, ListProductContainer, ProductContainer, 
+    ProductContainerColumn, ListProductContainer, ProductContainer, 
     ProductImage, ProductName, Remove,
-    IncrementFavorites
+    IncrementFavorites, WishlistEmpty
 }from './styles';
 
 
 
 function AccountFavorites( { favorites, loadFavorites, removeProduct, incrementFavorites, resetFavorites }: Props ) {
+    
     useEffect( () => {
         resetFavorites();
         loadFavorites();
     }, [loadFavorites, resetFavorites])
 
+
+
+    const FavoriteProduct = ({product}: { product: Product} )=> (<ProductContainer>
+        <ProductContainerColumn>
+            <ProductImage src={product.image_src} />
+            <ProductName>
+                {product.name}
+            </ProductName>
+        </ProductContainerColumn>
+
+        <ProductContainerColumn>
+            <Remove onClick={ () => removeProduct(product.id) }>
+                <FaTrash size={22} />
+            </Remove>
+            <BuyProduct>
+                <FaCartPlus style={{ marginRight: 8 }} />
+                Adicionar
+            </BuyProduct>
+        </ProductContainerColumn>
+    </ProductContainer>);
+
     return(
-        <main>
-            <h2>Lista de favoritos.</h2>
-            <span>{favorites.count} produtos encontrados.</span>
+        <TemplatePage>
+            <AccountMenu />
+            <Container>
+                <h2>Lista de Desejos.</h2>
 
-            <ListProductContainer>
-                {favorites && favorites.data?.map( ({ Product }) => 
-                    (<ProductContainer>
-                        <Container>
-                            <ProductImage src={Product.image_src} />
+                {favorites.count > 0 && <span>{favorites.count} produtos encontrados.</span>}
+                {favorites.count === 0 && <WishlistEmpty>Nenhum produto favoritado.</WishlistEmpty>}
 
-                            <ProductName>
-                                {Product.name}
-                            </ProductName>
-                        </Container>
+                <ListProductContainer>
+                    { favorites && favorites.data?.map( ({ Product }) => 
+                        (<FavoriteProduct product={Product} />)
+                    )}
 
-                        <Container>
-                            <Remove onClick={ () => removeProduct(Product.id) }>
-                                <FaTrash size={22} />
-                            </Remove>
-                            <BuyProduct>Adicionar</BuyProduct>
-                        </Container>
-                    </ProductContainer>) 
-                )}
-
-                <IncrementFavorites 
-                    onClick={() => incrementFavorites()}
-                    disabled={favorites.count === favorites.data.length}
-                >
-                    <FaPlus size={22} />
-                </IncrementFavorites>
-            </ListProductContainer>
-        </main>
-    )
+                    { favorites.count !== favorites.data.length && <IncrementFavorites 
+                        onClick={() => incrementFavorites()}
+                        disabled={favorites.count === favorites.data.length}
+                    >
+                        <FaPlus size={22} />
+                    </IncrementFavorites>}
+                </ListProductContainer>
+            </Container>
+        </TemplatePage>
+    );
 }
 
 export default connector(AccountFavorites);
