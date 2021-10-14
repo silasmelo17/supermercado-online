@@ -58,6 +58,7 @@ export const ListIcons = styled.ul`
 `;
 
 export const IconContainer = styled.li`
+    position: relative;
     display: flex ;
     align-items: center;
     justify-content: center;
@@ -73,4 +74,9 @@ export const IconContainer = styled.li`
 export const Username = styled.span`
     font-size: 12px;
     margin-left: 8px;
+`
+
+
+export const DropDown = styled.span`
+    
 `

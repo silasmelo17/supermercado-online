@@ -1,5 +1,6 @@
 
 import { useState, useEffect, FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 
 import axios from '../../config/axios.config';
 
@@ -13,7 +14,9 @@ import {
 } from '../../components/Forms/styles';
 
 import { ValidationStep } from './styles';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
+
+import User from '../../types/User';
 
 
 
@@ -48,8 +51,6 @@ function Register({ auth }: Props) {
 
     const [ disabledButton, setDisabledButton ] = useState<boolean>(false);
 
-    const successesStates = [ successName, successLastName, successCPF, successPhone, successBirthday, successEmail, successConfirmEmail, successPassword, successConfirmPassword]
-
 
 
     useEffect( () => {
@@ -59,30 +60,28 @@ function Register({ auth }: Props) {
 
     
 
-    const onSubmitRegister = (event: FormEvent) => {
+    const onSubmitRegister = async (event: FormEvent) => {
         event.preventDefault();
 
-        (async () => {
-            const result = await axios({
-                method: "post",
-                url: 'http://localhost:3000/api/user/register',
-                data: {
-                    name, 
-                    last_name, 
-                    email, 
-                    cpf: cpf.replaceAll(/[^0-9]/g, ''), 
-                    phone: cpf.replaceAll(/[^0-9]/g, ''), 
-                    password,
-                    birthday
-                }
-            })
-            .then( r => r )
-            .catch( (err: AxiosError<any>) => {
-                const responseError = err.response;
+        axios.post<any, AxiosResponse<User>>( '/user/register', {
+            name, 
+            last_name, 
+            email, 
+            cpf: cpf.replaceAll(/[^0-9]/g, ''), 
+            phone: phone.replaceAll(/[^0-9]/g, ''), 
+            password,
+            birthday
+        })
+        .then( (response) => {
+            if(response.status === 201) {
+                window.location.href = "/signin";
+            }
+        })
+        .catch( (err: AxiosError<any>) => {
+            const responseError = err.response;
 
-                setMessageError( responseError?.data.message );
-            });
-        })();
+            setMessageError( responseError?.data.message );
+        });
     }
 
 
@@ -163,10 +162,21 @@ function Register({ auth }: Props) {
     }, [password]);
 
     useEffect( () => {
+        const successesStates = [ 
+            successName, successLastName, 
+            successCPF, successPhone, successBirthday, 
+            successEmail, successConfirmEmail, 
+            successPassword, successConfirmPassword 
+        ];
         const someError = successesStates.filter( s => (s === undefined || s === false) );
 
         setDisabledButton( someError.length !== 0 );
-    }, [ successesStates ]);
+    }, [ 
+        successName, successLastName, 
+        successCPF, successPhone, successBirthday, 
+        successEmail, successConfirmEmail, 
+        successPassword, successConfirmPassword 
+    ]);
 
 
 
@@ -289,6 +299,12 @@ function Register({ auth }: Props) {
                     placeholder="Confirme sua senha"
                 />
             </ColumnContainer>
+
+            <Container>
+                <Link to="/signin">
+                    Já possui cadastro ? Faça o login.
+                </Link>
+            </Container>
 
             { messageError !== '' && <Container>
                 <span>{messageError}</span>

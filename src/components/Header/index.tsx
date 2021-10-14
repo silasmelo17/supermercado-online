@@ -12,21 +12,15 @@ import connector, { Props } from './connector';
 import { 
     HeaderContainer, HeaderNavigation, HeaderTitle, 
     IconContainer, ListIcons, SearchProduct, SearchProductContainer,
-    Username
+    Username, DropDown
 } from './styles'
 
 
 
 
 function Header( { auth, user, loadingSuggestions, clearSuggestions }: Props ) {
+    
     const [ name, setName ] = useState<string>("");
-
-
-    const useDebounce = (
-        fn: (...args:any[]) => void, 
-        wait:number=500, 
-        time: NodeJS.Timeout 
-    ) => (...args:any[]) => clearTimeout(time, time = setTimeout( () => fn(...args), wait) )
 
     useEffect( () => {
         if(name.length >= 3)
@@ -47,7 +41,6 @@ function Header( { auth, user, loadingSuggestions, clearSuggestions }: Props ) {
                         Supermercado
                     </HeaderTitle>
                 </Link>
-
 
                 <SearchProductContainer 
                     autoComplete="off" 
@@ -76,6 +69,10 @@ function Header( { auth, user, loadingSuggestions, clearSuggestions }: Props ) {
                         { auth && <Username>
                             Olá, {user?.name}
                         </Username>}
+
+                        { auth && <DropDown>
+
+                        </DropDown>}
                     </IconContainer>
                     <IconContainer>
                         <Link to="/account/favorites">

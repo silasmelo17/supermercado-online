@@ -1,8 +1,4 @@
 
-import axios from '../../config/axios.config';
-
-import { AxiosResponse, AxiosError } from 'axios';
-
 import { useEffect } from "react";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { BuyProduct } from "../../components/Product/styles";

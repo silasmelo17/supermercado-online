@@ -46,7 +46,7 @@ export const Remove = styled.button`
     color: #ccc;
 
     &:hover {
-        color: #067BF9;
+        color: red;
         transition: 200ms;
     }
 `;
@@ -55,11 +55,11 @@ export const IncrementFavorites = styled.button`
     border-radius: 50%;
     background: #067BF9;
     color: white;
-    width: 40px;
-    height: 40px;
 
     cursor: pointer;
 
+    width: 40px;
+    height: 40px;
     margin: 20px auto 0 auto;
 
     &:disabled {
