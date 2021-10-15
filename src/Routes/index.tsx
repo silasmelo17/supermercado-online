@@ -7,16 +7,19 @@ import {
   Redirect
 } from 'react-router-dom';
 
-import AccountFavorites from '../pages/AccountFavorites';
 
 import Products from '../pages/Products';
 import ProductsByCategory from '../pages/ProductsByCategory';
 import ProductsByName from '../pages/ProductsByName';
+
 import Register from '../pages/Register';
 import SignIn from '../pages/SignIn';
+
 import Account from '../pages/Account';
+import AccountFavorites from '../pages/AccountFavorites';
 
 import connector, { Props } from './connector';
+import AccountAddresses from '../pages/AccountAddresses';
 
 
 
@@ -55,6 +58,9 @@ function Routes( { auth, loading, token, tokenAuthentication }: Props) {
                 </Route>
                 <Route exact path="/account/favorites">
                     { auth ? <AccountFavorites />: <Redirect to="/signin" />}
+                </Route>
+                <Route exact path="/account/addresses">
+                    { auth ? <AccountAddresses />: <Redirect to="/signin" />}
                 </Route>
             </Switch>
         </BrowserRouter>}
