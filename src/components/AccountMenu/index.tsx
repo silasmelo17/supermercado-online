@@ -20,7 +20,7 @@ function AccountMenu() {
                 <Link to="/account">Dados Pessoais</Link>
             </AccountMenuItem>
             <AccountMenuItem>
-                <Link to="/">Endereços</Link>
+                <Link to="/account/addresses">Endereços</Link>
             </AccountMenuItem>
             <AccountMenuItem>
                 <Link to="/">Cartões</Link>
