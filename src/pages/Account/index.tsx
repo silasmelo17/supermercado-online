@@ -1,58 +1,44 @@
 
-import TemplatePage from '../../templates/PageTemplate';
-
-import AccountMenu from "../../components/AccountMenu";
-
-import { Container } from '../../components/Main';
+import TemplateAccount from '../../templates/TemplateAccount';
 
 import connector, { Props } from "./connector";
-import { FieldContainer, FieldName, FieldValue, Title, SubTitle } from './styles';
+import { FieldContainer, FieldName, FieldValue } from './styles';
 
 
 
 function Account( {user}: Props) {
     return(
-        <TemplatePage>
-            <AccountMenu />
-            <Container>
-                <Title>
-                </Title>
+        <TemplateAccount subtitle="Dados Pessoais">
+            <FieldContainer>
+                <FieldName>Nome: </FieldName>
+                <FieldValue>{user?.name}</FieldValue>
+            </FieldContainer>
 
-                <SubTitle>
-                    Dados Pessoais
-                </SubTitle>
+            <FieldContainer>
+                <FieldName>Sobrenome: </FieldName>
+                <FieldValue>{user?.last_name}</FieldValue>
+            </FieldContainer>
 
-                <FieldContainer>
-                    <FieldName>Nome: </FieldName>
-                    <FieldValue>{user?.name}</FieldValue>
-                </FieldContainer>
+            <FieldContainer>
+                <FieldName>CPF: </FieldName>
+                <FieldValue>{user?.cpf}</FieldValue>
+            </FieldContainer>
 
-                <FieldContainer>
-                    <FieldName>Sobrenome: </FieldName>
-                    <FieldValue>{user?.last_name}</FieldValue>
-                </FieldContainer>
+            <FieldContainer>
+                <FieldName>Telefone: </FieldName>
+                <FieldValue>{user?.phone}</FieldValue>
+            </FieldContainer>
 
-                <FieldContainer>
-                    <FieldName>CPF: </FieldName>
-                    <FieldValue>{user?.cpf}</FieldValue>
-                </FieldContainer>
+            <FieldContainer>
+                <FieldName>E-mail: </FieldName>
+                <FieldValue>{user?.email}</FieldValue>
+            </FieldContainer>
 
-                <FieldContainer>
-                    <FieldName>Telefone: </FieldName>
-                    <FieldValue>{user?.phone}</FieldValue>
-                </FieldContainer>
-
-                <FieldContainer>
-                    <FieldName>E-mail: </FieldName>
-                    <FieldValue>{user?.email}</FieldValue>
-                </FieldContainer>
-
-                <FieldContainer>
-                    <FieldName>Data de nascimento: </FieldName>
-                    <FieldValue>{user?.birthday}</FieldValue>
-                </FieldContainer>
-            </Container>
-        </TemplatePage>
+            <FieldContainer>
+                <FieldName>Data de nascimento: </FieldName>
+                <FieldValue>{user?.birthday}</FieldValue>
+            </FieldContainer>
+        </TemplateAccount>
     )
 }
 

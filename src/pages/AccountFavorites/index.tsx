@@ -2,10 +2,8 @@
 import { useEffect } from "react";
 import { FaPlus, FaTrash, FaCartPlus } from "react-icons/fa";
 
-import TemplatePage from "../../templates/PageTemplate";
+import TemplateAccount from "../../templates/TemplateAccount";
 
-import AccountMenu from "../../components/AccountMenu";
-import { Container } from "../../components/Main";
 import { BuyProduct } from "../../components/Product/styles";
 
 import Product from "../../types/Product";
@@ -49,28 +47,23 @@ function AccountFavorites( { favorites, loadFavorites, removeProduct, incrementF
     </ProductContainer>);
 
     return(
-        <TemplatePage>
-            <AccountMenu />
-            <Container>
-                <h2>Lista de Desejos.</h2>
+        <TemplateAccount subtitle="Lista de Desejos">
+            {favorites.count > 0 && <span>{favorites.count} produtos encontrados.</span>}
+            {favorites.count === 0 && <WishlistEmpty>Nenhum produto favoritado.</WishlistEmpty>}
 
-                {favorites.count > 0 && <span>{favorites.count} produtos encontrados.</span>}
-                {favorites.count === 0 && <WishlistEmpty>Nenhum produto favoritado.</WishlistEmpty>}
+            <ListProductContainer>
+                { favorites && favorites.data?.map( ({ Product }) => 
+                    (<FavoriteProduct product={Product} />)
+                )}
 
-                <ListProductContainer>
-                    { favorites && favorites.data?.map( ({ Product }) => 
-                        (<FavoriteProduct product={Product} />)
-                    )}
-
-                    { favorites.count !== favorites.data.length && <IncrementFavorites 
-                        onClick={() => incrementFavorites()}
-                        disabled={favorites.count === favorites.data.length}
-                    >
-                        <FaPlus size={22} />
-                    </IncrementFavorites>}
-                </ListProductContainer>
-            </Container>
-        </TemplatePage>
+                { favorites.count !== favorites.data.length && <IncrementFavorites 
+                    onClick={() => incrementFavorites()}
+                    disabled={favorites.count === favorites.data.length}
+                >
+                    <FaPlus size={22} />
+                </IncrementFavorites>}
+            </ListProductContainer>
+        </TemplateAccount>
     );
 }
 
