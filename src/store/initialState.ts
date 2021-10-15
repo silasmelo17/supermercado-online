@@ -34,7 +34,8 @@ export const INITIAL_ACCOUNT_FAVORITES: Favorites = {
 
 export const INITIAL_ACCOUNT_STATE: Account = {
     user: INITIAL_ACCOUNT_USER,
-    favorites: INITIAL_ACCOUNT_FAVORITES
+    favorites: INITIAL_ACCOUNT_FAVORITES,
+    addresses: []
 }
 
 
@@ -51,6 +52,7 @@ const INITIAL_STATE: GlobalState = {
     account: INITIAL_ACCOUNT_STATE,
     header: INITIAL_HEADER_STATE
 };
+
 
 
 export default INITIAL_STATE;
