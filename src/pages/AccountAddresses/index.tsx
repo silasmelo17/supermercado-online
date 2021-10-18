@@ -8,7 +8,7 @@ import connector, { Props } from "./connector";
 
 import AddressComponent from "../../components/AddressComponent";
 
-import { ListAddresses } from './styles';
+import { ListAddresses, ButtonLink } from './styles';
 
 
 
@@ -28,7 +28,9 @@ function AccountAddresses({ addresses, loadAddresses }: Props ) {
                 )}
             </ListAddresses>
 
-            <Link to="/account/addresses/register">Adicionar novo endereço</Link>
+            <ButtonLink style={{ marginLeft: 'auto' }} to="/account/addresses/register">
+                Adicionar novo endereço
+            </ButtonLink>
         </TemplateAccount>
     );
 }
