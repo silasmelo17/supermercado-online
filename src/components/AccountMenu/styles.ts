@@ -13,13 +13,15 @@ export const AccountMenuContainer = styled.section<{ fixed: boolean}>`
     margin-right: auto;
 `;
 
-export const AccountMenuItem = styled.div`
+export const AccountMenuItem = styled.div<{ selected: boolean}>`
     padding: 16px 24px;
-    border: 3px solid #eee;
     font-size: 18px;
     cursor: pointer;
 
-    color: #444;
+    color: ${ ({selected}) => selected ? 'white': '#444' };
+    background: ${ ({selected}) => selected ? '#067BF9': 'white' };
+    border: 3px solid ${ ({selected}) => selected ? '#067BF9': '#eee' };
+
 
     & + & {
         border-top: 0;

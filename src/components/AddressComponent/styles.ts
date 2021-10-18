@@ -12,9 +12,8 @@ export const AddressContainer = styled.article`
     padding: 16px 12px;
     height: max-content;
 
-    background: #efefef;
-    box-shadow: 2px 2px 4px #efefef,
-                2px 2px 4px white inset;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 `;
 
 export const Text = styled.span``;

@@ -16,7 +16,7 @@ function AddressComponent({ id, name, street, number, complement, neighborhood, 
             <Text>{neighborhood}, {city} - {state}</Text>
             <Text>CEP: {cep}</Text>
 
-            <EditAddress to={`/account/addresses/${id}`}>
+            <EditAddress to={`/account/address/${id}`}>
                 <FaEdit size={18} />
             </EditAddress>
         </AddressContainer>
