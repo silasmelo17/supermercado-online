@@ -6,7 +6,7 @@ interface Address {
     cep: string,
     number: number,
     complement: string,
-    references: string,
+    references?: string,
 
     state?: string,
     city?: string,

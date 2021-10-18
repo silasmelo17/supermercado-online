@@ -19,6 +19,8 @@ import Account from '../pages/Account';
 import AccountFavorites from '../pages/AccountFavorites';
 
 import connector, { Props } from './connector';
+
+import AccountAddress from '../pages/AccountAddress';
 import AccountAddresses from '../pages/AccountAddresses';
 import AccountAddressesRegister from '../pages/AccountAddressesRegister';
 
@@ -54,18 +56,25 @@ function Routes( { auth, loading, token, tokenAuthentication }: Props) {
                     <ProductsByCategory />
                 </Route>
                 
-                <Route exact path="/account">
-                    { auth ? <Account />: <Redirect to="/signin" /> }
-                </Route>
-                <Route exact path="/account/favorites">
-                    { auth ? <AccountFavorites />: <Redirect to="/signin" />}
-                </Route>
-                <Route exact path="/account/addresses">
-                    { auth ? <AccountAddresses />: <Redirect to="/signin" />}
-                </Route>
-                <Route exact path="/account/addresses/register">
-                    { auth ? <AccountAddressesRegister />: <Redirect to="/signin" />}
-                </Route>
+                { !auth && loading === false
+                    ? <Redirect to="/signin" />
+                    :<>
+                        <Route exact path="/account">
+                            <Account /> 
+                        </Route>
+                        <Route exact path="/account/favorites">
+                            <AccountFavorites />
+                        </Route>
+                        <Route exact path="/account/addresses">
+                            <AccountAddresses />
+                        </Route>
+                        <Route exact path="/account/addresses/register">
+                            <AccountAddressesRegister />
+                        </Route>
+                        <Route exact path="/account/address/:id" >
+                            <AccountAddress />
+                        </Route>
+                    </>}
             </Switch>
         </BrowserRouter>}
     </>);
