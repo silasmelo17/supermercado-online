@@ -19,6 +19,8 @@ export const loadAddresses = () =>
             headers: { token }
         });
 
+        console.log( 'thunks', result );
+
         if(result.status === 200) {
             dispatch(AddressesAction.setAddresses(result.data));
         }

@@ -1,6 +1,8 @@
 
 import { useEffect } from "react";
 
+import { Link } from 'react-router-dom';
+
 import TemplateAccount from "../../templates/TemplateAccount";
 import connector, { Props } from "./connector";
 
@@ -13,18 +15,20 @@ import { ListAddresses } from './styles';
 function AccountAddresses({ addresses, loadAddresses }: Props ) {
     
     useEffect( () => {
-        loadAddresses()
+        loadAddresses();
     }, [loadAddresses]);
 
 
 
     return(
-        <TemplateAccount subtitle="Endereços" >
+        <TemplateAccount title="Endereços" subtitle="Meus endereços" >
             <ListAddresses>
                 {addresses.map( (address) => 
                     (<AddressComponent {...address} />) 
                 )}
             </ListAddresses>
+
+            <Link to="/account/addresses/register">Adicionar novo endereço</Link>
         </TemplateAccount>
     );
 }
