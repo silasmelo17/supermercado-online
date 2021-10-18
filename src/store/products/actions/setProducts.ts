@@ -8,8 +8,6 @@ import { SET_ALL_PRODUCTS } from '../types'
 
 
 function setProducts( playload: AxiosResponseProducts ): ActionProductsType {
-    console.log(playload.term)
-
     return {
         type: SET_ALL_PRODUCTS,
         data: playload.data,

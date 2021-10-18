@@ -21,8 +21,6 @@ export const userAuthentication = ( email: string, password: string ) =>
             { email, password }
         );
 
-        console.log(data);
-
         dispatch( ActionsAuthentication.userAuthentication( data.auth, data.token ) );
         if(data.auth)
             dispatch( UserAction.setUser(data.user) );
@@ -38,9 +36,6 @@ export const userTokenAuthentication = () =>
 
         const { data } = await axios
             .post<any, AxiosResponseAuthentication >(`/user/logged/`, {}, {headers: { token }} );
-
-        
-        console.log( 'token', data)
 
         dispatch( ActionsAuthentication.tokenAuthentication( data.auth ) );
         if(data.auth)
