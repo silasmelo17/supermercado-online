@@ -20,6 +20,7 @@ import AccountFavorites from '../pages/AccountFavorites';
 
 import connector, { Props } from './connector';
 import AccountAddresses from '../pages/AccountAddresses';
+import AccountAddressesRegister from '../pages/AccountAddressesRegister';
 
 
 
@@ -61,6 +62,9 @@ function Routes( { auth, loading, token, tokenAuthentication }: Props) {
                 </Route>
                 <Route exact path="/account/addresses">
                     { auth ? <AccountAddresses />: <Redirect to="/signin" />}
+                </Route>
+                <Route exact path="/account/addresses/register">
+                    { auth ? <AccountAddressesRegister />: <Redirect to="/signin" />}
                 </Route>
             </Switch>
         </BrowserRouter>}
