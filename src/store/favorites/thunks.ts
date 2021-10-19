@@ -7,8 +7,8 @@ import { ThunkDispatch } from 'redux-thunk';
 
 import * as FavoritesAction from './actions';
 
-import Favorites from '../../types/Favorites';
-import GlobalState from '../../types/GlobalState';
+import Favorites from '../../types/reduxState/Favorites';
+import GlobalState from '../../types/reduxState/GlobalState';
 
 
 

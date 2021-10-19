@@ -5,8 +5,8 @@ import { ThunkDispatch } from "redux-thunk";
 import axios from "../../../config/axios.config";
 
 import ActionsProducts from "../actions";
-import AxiosResponseProducts from "../../../types/AxiosResponseProducts";
-import GlobalState from "../../../types/GlobalState";
+import AxiosResponseProducts from "../../../types/axiosResponse/AxiosResponseProducts";
+import GlobalState from "../../../types/reduxState/GlobalState";
 
 
 
@@ -15,7 +15,7 @@ function findAllProductsByName( name: string ) {
         const { page, limit } = (getState()).products;
         const { token } = (getState()).authentication;
 
-        const { data } = await axios.get<AxiosResponseProducts>( `/products/name/${name}`, {
+        const { data } = await axios.get<any,AxiosResponseProducts>( `/products/name/${name}`, {
             headers: { token },
             params: { limit, page }
         });

@@ -6,8 +6,8 @@ import { ThunkDispatch } from 'redux-thunk';
 
 import * as AddressesAction from './actions';
 
-import GlobalState from '../../types/GlobalState';
-import Address from '../../types/Address';
+import GlobalState from '../../types/reduxState/GlobalState';
+import Address from '../../types/objects/Address';
 
 
 

@@ -4,10 +4,10 @@ import axios from '../../config/axios.config';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 
-import GlobalState from '../../types/GlobalState';
+import GlobalState from '../../types/reduxState/GlobalState';
 
 import * as ActionsAuthentication from './actions';
-import AxiosResponseAuthentication from '../../types/AxiosResponseAuthentication';
+import AxiosResponseAuthentication from '../../types/axiosResponse/AxiosResponseAuthentication';
 
 import * as UserAction from '../user/actions';
 

@@ -1,7 +1,7 @@
 
 import { Action } from 'redux';
 
-import User from '../../types/User';
+import User from '../../types/objects/User';
 import { INITIAL_ACCOUNT_USER } from '../initialState';
 
 import * as UserTypes from './types';

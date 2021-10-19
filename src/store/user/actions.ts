@@ -1,5 +1,5 @@
 
-import User from "../../types/User"
+import User from "../../types/objects/User"
 
 import * as AccountTypes from './types';
 

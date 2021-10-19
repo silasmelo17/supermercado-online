@@ -3,7 +3,7 @@ import { Action } from 'redux'
 import { INITIAL_HEADER_STATE } from '../initialState';
 
 import * as HEADER_TYPES from './types';
-import Product from '../../types/Product';
+import Product from '../../types/objects/Product';
 
 
 

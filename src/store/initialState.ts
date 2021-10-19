@@ -1,11 +1,12 @@
 
-import Account from '../types/Account';
-import User from '../types/User';
-import Authentication from '../types/Authentication';
-import GlobalState from '../types/GlobalState';
-import Header from '../types/Header';
-import Products from '../types/Products';
-import Favorites from '../types/Favorites';
+import Account from '../types/reduxState/Account';
+import User from '../types/objects/User';
+import Authentication from '../types/reduxState/Authentication';
+import GlobalState from '../types/reduxState/GlobalState';
+import Header from '../types/reduxState/Header';
+import Products from '../types/reduxState/Products';
+import Favorites from '../types/reduxState/Favorites';
+import Cart from '../types/reduxState/Cart';
 
 
 
@@ -32,10 +33,19 @@ export const INITIAL_ACCOUNT_FAVORITES: Favorites = {
     data: []
 }
 
+export const INITIAL_ACCOUNT_CART: Cart =  {
+    count: 0,
+    limit: 10,
+    offset: 0,
+    page: 1,
+    data: []
+}
+
 export const INITIAL_ACCOUNT_STATE: Account = {
     user: INITIAL_ACCOUNT_USER,
     favorites: INITIAL_ACCOUNT_FAVORITES,
-    addresses: []
+    addresses: [],
+    cart: INITIAL_ACCOUNT_CART
 }
 
 

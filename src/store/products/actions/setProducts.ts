@@ -1,21 +1,21 @@
 
-import AxiosResponseProducts from '../../../types/AxiosResponseProducts';
-
-import { ActionProductsType } from '../@types';
+import Products from '../../../types/reduxState/Products';
 
 import { SET_ALL_PRODUCTS } from '../types'
 
 
 
-function setProducts( playload: AxiosResponseProducts ): ActionProductsType {
+function setProducts(products: Products) {
     return {
         type: SET_ALL_PRODUCTS,
-        data: playload.data,
-        page: playload.page,
-        count: playload.count,
-        offset: playload.offset,
-        limit: playload.limit,
-        term: playload.term ? playload.term : undefined
+        playload: {
+            data: products.data,
+            page: products.page,
+            count: products.count,
+            offset: products.offset,
+            limit: products.limit,
+            term: products.term ? products.term : undefined
+        }
     };
 }
 

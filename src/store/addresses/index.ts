@@ -1,5 +1,5 @@
 
-import Address from "../../types/Address";
+import Address from "../../types/objects/Address";
 
 import * as AddressesTypes from './types';
 

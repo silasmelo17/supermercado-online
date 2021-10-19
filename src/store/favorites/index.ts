@@ -1,7 +1,8 @@
 
 import { Action } from 'redux';
 
-import Favorites, { Favorite } from '../../types/Favorites';
+import Favorite from '../../types/objects/Favorite';
+import Favorites from '../../types/reduxState/Favorites';
 
 import { INITIAL_ACCOUNT_FAVORITES } from '../initialState';
 import * as FavoritesTypes from './types';

@@ -1,5 +1,5 @@
 
-import Product from '../../types/Product';
+import Product from '../../types/objects/Product';
 
 import * as HEADER_TYPES from './types';
 

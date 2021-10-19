@@ -1,8 +1,8 @@
 
 import { Action } from 'redux';
 
-import User from '../../types/User';
-import Authentication from "../../types/Authentication";
+import User from '../../types/objects/User';
+import Authentication from "../../types/reduxState/Authentication";
 
 import { INITIAL_AUTH_STATE } from "../initialState";
 

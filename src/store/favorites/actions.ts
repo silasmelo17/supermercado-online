@@ -1,5 +1,6 @@
 
-import Favorites, {Favorite} from '../../types/Favorites';
+import Favorite from '../../types/objects/Favorite';
+import Favorites from '../../types/reduxState/Favorites';
 
 import * as FavoritesTypes from './types';
 
