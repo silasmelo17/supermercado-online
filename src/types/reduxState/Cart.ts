@@ -1,21 +1,20 @@
 
-import Product from './Product';
+import Product from "../objects/Product";
 
 
 
-export interface Favorite {
+export interface ProductCart {
     id: number,
     user_id: number,
     product_id: number,
+    amount: number,
     Product: Product
 }
 
-interface Favorites {
+export default interface Cart {
     count: number,
     limit: number,
     offset: number,
     page: number,
-    data: Favorite[]
+    data: ProductCart[]
 }
-
-export default Favorites;

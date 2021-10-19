@@ -1,5 +1,6 @@
 
 import Category from './Category';
+import Favorite from './Favorite';
 
 
 
@@ -12,8 +13,10 @@ interface Product {
     codeBar?: string,
     category_id?: number,
     Category?: Category,
+    Favorites?: Favorite
 
-    favorite?: boolean
+    favorite?: boolean,
+    cart?: boolean
 }
 
 export default Product;

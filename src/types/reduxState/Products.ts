@@ -1,5 +1,5 @@
 
-import Product from './Product';
+import Product from '../objects/Product';
 
 
 
@@ -10,6 +10,7 @@ interface Products {
     count: number,
     offset?: number,
     term?: string,
+    auth?: boolean
 }
 
 export default Products;

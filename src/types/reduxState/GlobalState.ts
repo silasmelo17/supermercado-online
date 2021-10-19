@@ -1,6 +1,5 @@
 
 import Authentication from './Authentication';
-import User from './User';
 import Products from './Products';
 import Header from './Header';
 import Account from './Account';
