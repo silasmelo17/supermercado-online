@@ -5,7 +5,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import * as ThunksAuthentication from '../../store/authentication/thunks';
 import ActionProducts from '../../store/products/actions';
 
-import GlobalState from '../../types/GlobalState';
+import GlobalState from '../../types/reduxState/GlobalState';
 
 
 

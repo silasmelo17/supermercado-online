@@ -1,10 +1,10 @@
 
 import { useEffect } from 'react';
 import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Redirect
+    BrowserRouter,
+    Switch,
+    Route,
+    Redirect
 } from 'react-router-dom';
 
 
@@ -23,31 +23,33 @@ import connector, { Props } from './connector';
 import AccountAddress from '../pages/AccountAddress';
 import AccountAddresses from '../pages/AccountAddresses';
 import AccountAddressesRegister from '../pages/AccountAddressesRegister';
+import AccountCart from '../pages/AccountCart';
 
 
 
-function Routes( { auth, loading, token, tokenAuthentication }: Props) {
-    useEffect( () => {
+function Routes({ auth, loading, token, tokenAuthentication }: Props) {
+    useEffect(() => {
         tokenAuthentication();
-    }, [ tokenAuthentication ]);
+    }, [tokenAuthentication]);
 
-    useEffect( () => {
-        auth 
-            ? localStorage.setItem( 'token', token )
-            : localStorage.removeItem( 'token' )
-    }, [auth, token] );
+    useEffect(() => {
+        auth
+            ? localStorage.setItem('token', token)
+            : localStorage.removeItem('token')
+    }, [auth, token]);
 
-    return(<>
-        { loading === false && <BrowserRouter>
+    return (<>
+        {loading === false && <BrowserRouter>
             <Switch>
-                <Route exact path="/">
-                    <Products />
-                </Route>
                 <Route exact path="/signin">
-                    { auth ? <Redirect to="/" /> : <SignIn /> }
+                    {auth ? <Redirect to="/" /> : <SignIn />}
                 </Route>
                 <Route exact path="/register">
-                    { auth ? <Redirect to="/" /> : <Register /> }                    
+                    {auth ? <Redirect to="/" /> : <Register />}
+                </Route>
+
+                <Route exact path="/">
+                    <Products />
                 </Route>
                 <Route exact path="/products/name/:name">
                     <ProductsByName />
@@ -55,12 +57,12 @@ function Routes( { auth, loading, token, tokenAuthentication }: Props) {
                 <Route exact path="/products/category/:id">
                     <ProductsByCategory />
                 </Route>
-                
-                { !auth && loading === false
+
+                {!auth
                     ? <Redirect to="/signin" />
-                    :<>
+                    : <>
                         <Route exact path="/account">
-                            <Account /> 
+                            <Account />
                         </Route>
                         <Route exact path="/account/favorites">
                             <AccountFavorites />
@@ -73,6 +75,9 @@ function Routes( { auth, loading, token, tokenAuthentication }: Props) {
                         </Route>
                         <Route exact path="/account/address/:id" >
                             <AccountAddress />
+                        </Route>
+                        <Route exact path="/account/cart">
+                            <AccountCart />
                         </Route>
                     </>}
             </Switch>

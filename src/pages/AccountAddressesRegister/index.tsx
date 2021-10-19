@@ -6,7 +6,7 @@ import FormAddress from "../../components/FormAddress";
 
 
 
-function AccountAddressesRegister( {}: Props ) {
+function AccountAddressesRegister( props: Props ) {
     return(
         <TemplateAccount title='Endereços' subtitle='Registrar endereço'>
             <FormAddress method='post' />

@@ -2,7 +2,7 @@
 import { PropsWithChildren } from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 
-import GlobalState from '../../types/GlobalState';
+import GlobalState from '../../types/reduxState/GlobalState';
 
 
 

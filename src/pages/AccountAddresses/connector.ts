@@ -1,6 +1,6 @@
 
 import { connect, ConnectedProps } from 'react-redux';
-import GlobalState from '../../types/GlobalState';
+import GlobalState from '../../types/reduxState/GlobalState';
 
 import * as ThunksAddresses from '../../store/addresses/thunks';
 

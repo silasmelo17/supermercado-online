@@ -1,8 +1,6 @@
 
 import { useEffect } from "react";
 
-import { Link } from 'react-router-dom';
-
 import TemplateAccount from "../../templates/TemplateAccount";
 import connector, { Props } from "./connector";
 

@@ -18,7 +18,7 @@ import {
 import { ValidationStep } from './styles';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import User from '../../types/User';
+import User from '../../types/objects/User';
 
 
 

@@ -1,6 +1,6 @@
 
 import { connect, ConnectedProps } from 'react-redux';
-import GlobalState from '../../types/GlobalState';
+import GlobalState from '../../types/reduxState/GlobalState';
 
 import * as ThunksActions from '../../store/authentication/thunks';
 import * as HeaderActions from '../../store/header/actions';

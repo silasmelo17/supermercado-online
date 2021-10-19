@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { userTokenAuthentication } from '../store/authentication/thunks';
 
-import GlobalState from '../types/GlobalState';
+import GlobalState from '../types/reduxState/GlobalState';
 
 
 

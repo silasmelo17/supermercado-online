@@ -6,7 +6,7 @@ import TemplateAccount from "../../templates/TemplateAccount";
 
 import { BuyProduct } from "../../components/Product/styles";
 
-import Product from "../../types/Product";
+import Product from "../../types/objects/Product";
 
 import connector, { Props } from "./connector";
 

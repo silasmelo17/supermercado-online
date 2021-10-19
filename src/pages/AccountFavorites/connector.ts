@@ -1,6 +1,6 @@
 
 import { connect, ConnectedProps } from 'react-redux';
-import GlobalState from '../../types/GlobalState';
+import GlobalState from '../../types/reduxState/GlobalState';
 
 import * as FavoritesThunks from '../../store/favorites/thunks';
 import * as FavoritesActions from '../../store/favorites/actions';

@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router';
 
 import findAllProductsByName from '../../store/products/thunks/findAllProductsByName';
 
-import GlobalState from '../../types/GlobalState';
+import GlobalState from '../../types/reduxState/GlobalState';
 
 
 

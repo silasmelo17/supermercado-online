@@ -1,5 +1,5 @@
 
-import GlobalState from "../../types/GlobalState";
+import GlobalState from "../../types/reduxState/GlobalState";
 
 import { connect, ConnectedProps } from 'react-redux';
 
