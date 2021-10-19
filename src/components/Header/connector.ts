@@ -3,7 +3,7 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import * as ThunkHeader from '../../store/header/thunk';
 import * as ActionHeader from '../../store/header/actions';
-import GlobalState from '../../types/GlobalState';
+import GlobalState from '../../types/reduxState/GlobalState';
 
 
 

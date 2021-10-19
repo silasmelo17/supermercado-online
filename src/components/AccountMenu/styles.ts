@@ -3,9 +3,8 @@ import styled from 'styled-components';
 
 
 
-export const AccountMenuContainer = styled.section<{ fixed: boolean}>`
-    position: ${ ({ fixed }) => fixed ? 'fixed': 'relative' };
-    top: ${ ({ fixed }) => fixed ? 76: 0 }px;
+export const AccountMenuContainer = styled.section`
+    position: relative;
 
     width: 400px;
     background: white;

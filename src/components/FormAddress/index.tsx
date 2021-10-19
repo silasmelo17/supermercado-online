@@ -17,8 +17,6 @@ import axios, { AxiosError } from "axios";
 
 
 function FormAddress( { token, method, address }: Props ) {
-    console.log('CEP', address?.cep)
-
     const [ name, setName ] = useState<string>( address?.name || '');
     const [ cpf, setCPF ] = useState<string>( address?.cpf || '');
     const [ cep, setCEP ] = useState<string>( address?.cep || '');
@@ -89,11 +87,11 @@ function FormAddress( { token, method, address }: Props ) {
                     setSuccessCEP(true);
                 }
             } else {
-                setSuccessCEP( cep.length === 0 ? undefined: false );
+                setSuccessCEP( cep.replace('-','').length === 0 ? undefined: false );
                 resetSomeFields();
             }
         }catch(err) {
-            setSuccessCEP( cep.length === 0 ? undefined: false );
+            setSuccessCEP( cep.replace('-','').length === 0 ? undefined: false );
             resetSomeFields();
         }
     }
@@ -141,7 +139,7 @@ function FormAddress( { token, method, address }: Props ) {
     useEffect( () => {
         setCEP('')
         resetSomeFields();
-    }, [withCEP]);
+    }, [withCEP, resetSomeFields ]);
 
 
 

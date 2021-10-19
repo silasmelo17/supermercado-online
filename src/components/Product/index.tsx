@@ -15,17 +15,26 @@ import {
 
 
 
-function Product( { token, auth, index, id, name, price, image_src, favorite, updateProduct }: Props) {
+function Product( { token, auth, index, id, name, price, image_src, amount, favorite, updateProduct }: Props) {
     
     const onClickFavoritedProduct = async () => {
-        const result: AxiosResponse<any> = await axios.post<any, any>( `/favorites/product/${id}`, {}, { headers: {token}} )
-            .catch( (err: AxiosError) => {} );
+        const result: AxiosResponse<any> = await axios
+            .post<any, any>( `/favorites/product/${id}`, {}, { headers: {token}} )
+                .catch( (err: AxiosError) => {} );
 
         if(result.status === 201 ) {
             updateProduct( index, { id, favorite: true });
         } else if( result.status === 200 ) {
             updateProduct( index, { id, favorite: false });
         }
+    }
+
+    const onClickBuyButton = async () => {
+        console.log('buybutton');
+
+        axios.post<any,any>( `/cart/${id}`, { amount: 1 }, { headers: {token }} )
+            .then( res => console.log(res.data) )
+            .catch( err => console.log(err) )
     }
 
     return(
@@ -50,10 +59,12 @@ function Product( { token, auth, index, id, name, price, image_src, favorite, up
                 }).format(price || 0)}
             </span>
 
-            <BuyProduct>
+            <BuyProduct onClick={onClickBuyButton} disabled={amount===0}>
                 <FaCartPlus style={{ marginRight: 8 }} />
-                Adicionar
-            </BuyProduct>
+                { amount === 0 
+                    ? 'Produto Indisponível'
+                    : 'Adicionar' }
+            </BuyProduct> 
         </ProductContainer>
     )
 }

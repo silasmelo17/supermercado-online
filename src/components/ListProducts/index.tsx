@@ -18,8 +18,14 @@ function ListProducts(props: Props) {
     
     return(
         <ProductsContainer>
-            { props.products.map( (product, i) => 
-                <Product key={`product___${i}`} index={i} {...product} /> ) }
+            { props.products.map( ({ Favorites, ...product }, i) => 
+                <Product 
+                    key={`product___${i}`} 
+                    index={i}
+                    favorite={(Favorites?.id !== undefined && Favorites?.id!== null) || false}
+                    {...product}
+                />
+            )}
         </ProductsContainer>
     );
 }

@@ -87,7 +87,9 @@ function Header( { auth, view, loadingSuggestions, clearSuggestions }: Props ) {
                     </IconContainer>}
 
                     { auth && <IconContainer>
-                        <FaCartPlus size={18} />
+                        <Link to="/account/cart">
+                            <FaCartPlus size={18} />
+                        </Link>
                     </IconContainer>}
 
                     <IconContainer>

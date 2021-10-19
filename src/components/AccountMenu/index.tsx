@@ -1,6 +1,4 @@
 
-import { useState } from 'react';
-
 import { RouteComponentProps } from 'react-router';
 import { Link, withRouter } from 'react-router-dom';
 
@@ -10,16 +8,9 @@ import { AccountMenuContainer, AccountMenuItem } from "./styles";
 
 
 function AccountMenu({ match }: RouteComponentProps ) {
-    const [ fixed, setFixed ] = useState<boolean>(false);
-
-    window.addEventListener( 'scroll', (event: any) => {
-        const { scrollY } = event.target.defaultView;
-
-        setFixed( scrollY >= 78 );
-    });
 
     return(
-        <AccountMenuContainer fixed={false}>  
+        <AccountMenuContainer>  
             <AccountMenuItem selected={ match.url === '/account'}>
                 <Link to="/account">Dados Pessoais</Link>
             </AccountMenuItem>
@@ -33,7 +24,7 @@ function AccountMenu({ match }: RouteComponentProps ) {
                 <Link to="/account/favorites">Lista de Desejos</Link>
             </AccountMenuItem>
             <AccountMenuItem selected={false}>
-                <Link to="/">Carrinho</Link>
+                <Link to="/account/cart">Carrinho</Link>
             </AccountMenuItem>
             <AccountMenuItem selected={false}>
                 <Link to="/">Meus pedidos</Link>

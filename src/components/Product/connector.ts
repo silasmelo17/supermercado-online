@@ -1,8 +1,8 @@
 
 import { connect, ConnectedProps } from 'react-redux';
-import GlobalState from '../../types/GlobalState';
+import GlobalState from '../../types/reduxState/GlobalState';
 
-import Product from '../../types/Product';
+import Product from '../../types/objects/Product';
 
 import ProductsAction from '../../store/products/actions/';
 

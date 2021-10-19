@@ -44,6 +44,10 @@ export const BuyProduct = styled.button`
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 1px;
+
+    &:disabled {
+        background: #ccc;
+    }
 `;
 
 

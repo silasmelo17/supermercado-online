@@ -53,10 +53,11 @@ function Pagination( { buttons = 5, count, limit, page, setPage, incrementPage, 
             > Anterior </PaginationButton>
 
             { arrayButtons
-                .map( current => (
+                .map( (current, i)=> (
                     <PaginationButton
                         active={page===current}
                         onClick={() => setPage(current)}
+                        key={`pagination___${i}`}
                     > {current} </PaginationButton>
                 ))
             }
