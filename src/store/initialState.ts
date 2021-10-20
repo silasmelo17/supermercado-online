@@ -12,8 +12,7 @@ import StateCart from '../types/reduxState/StateCart';
 
 export const INITIAL_AUTH_STATE: Authentication = {
     auth: false,
-    token: localStorage.getItem('token') || '',
-    loading: false
+    token: localStorage.getItem('token') || ''
 }
 
 export const INITIAL_PRODUCTS_STATE: Products = {

@@ -41,11 +41,6 @@ function authenticationReducer( state:Authentication = INITIAL_AUTH_STATE, actio
                 token: action.token,
                 user: undefined
             }
-        case AuthenticationTypes.SET_LOADING_AUTHENTICATION:
-            return {
-                ...state,
-                loading: action.loading
-            }
         default: 
             return state;
     }

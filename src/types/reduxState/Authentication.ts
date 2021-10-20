@@ -1,8 +1,7 @@
 
 interface Authentication {
     auth: boolean,
-    token: string,
-    loading: boolean
+    token: string
 }
 
 export default Authentication;

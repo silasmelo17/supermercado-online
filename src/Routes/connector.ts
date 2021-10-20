@@ -9,8 +9,7 @@ import GlobalState from '../types/reduxState/GlobalState';
 
 const mapStateToProps = ( state: GlobalState ) => ({
     auth: state.authentication.auth,
-    token: state.authentication.token,
-    loading: state.authentication.loading
+    token: state.authentication.token
 });
 
 const mapDispatchProps = (dispatch: any) => ({
