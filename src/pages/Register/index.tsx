@@ -77,7 +77,6 @@ function Register({ auth, ocultHeader }: Props) {
         })
         .catch( (err: AxiosError<any>) => {
             const responseError = err.response;
-
             setMessage( responseError?.data.message );
         });
     }

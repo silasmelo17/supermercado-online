@@ -7,11 +7,14 @@ import * as thunksCart from '../../store/cart/thunks'
 
 
 const mapStateToProps = (state: GlobalState) => ({
-    cart: state.account.cart
+    cart: state.account.cart,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    loadCart: () => dispatch( thunksCart.findCartProducts() )
+    loadCart: () => dispatch( thunksCart.findCartProducts() ),
+    
+    removeProductInCart: (id: number, index: number) => 
+        dispatch( thunksCart.removeProductInCart(id, index) )
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

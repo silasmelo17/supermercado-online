@@ -8,24 +8,19 @@ import connector, { Props } from './connector';
 
 
 function ListProducts(props: Props) {
-
-    // const LoadingProducts = () => props.products.length === 0
-    //     ? (<Loading size={32} />)
-    //     : (<ProductsContainer>
-    //         { props.products.map( (product, i) => 
-    //             <Product key={`product___${i}`} {...product} /> ) }
-    //     </ProductsContainer>)
-    
     return(
         <ProductsContainer>
-            { props.products.map( ({ Favorites, ...product }, i) => 
-                <Product 
+            { props.products.map( (product, i) => {
+                const { Favorites, Carts } = product;
+
+                return (<Product 
                     key={`product___${i}`} 
                     index={i}
-                    favorite={(Favorites?.id !== undefined && Favorites?.id!== null) || false}
-                    {...product}
-                />
-            )}
+                    product={product}
+                    favorite={(Favorites !== undefined && Favorites?.id !== null) || false}
+                    cart={ (Carts !== undefined && Carts?.id !== null) || false }
+                />)
+            })}
         </ProductsContainer>
     );
 }

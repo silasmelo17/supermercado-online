@@ -14,13 +14,16 @@ import {
 import connector, { Props } from './connector';
 
 
-function AccountCart( {loadCart, cart }: Props ) {
+
+function AccountCart( {loadCart, removeProductInCart, cart }: Props ) {
 
     useEffect( () => {
         loadCart();
     }, [loadCart]);
 
-    const CartProduct = ({product}: { product: Product} )=> (<ProductContainer>
+
+
+    const CartProduct = ({product, index, id}: { product: Product, index: number, id: number} )=> (<ProductContainer>
         <ProductContainerColumn>
             <CheckList type="checkbox" value={product.id} />
             
@@ -32,7 +35,7 @@ function AccountCart( {loadCart, cart }: Props ) {
         </ProductContainerColumn>
 
         <ProductContainerColumn>
-            <Remove onClick={ () => {} }>
+            <Remove onClick={ () => removeProductInCart( id, index ) }>
                 <FaTrash size={22} />
             </Remove>
         </ProductContainerColumn>
@@ -46,8 +49,12 @@ function AccountCart( {loadCart, cart }: Props ) {
             </ProductListEmpty>}
 
             <ListProductContainer>
-                { cart && cart.data?.map( ({ Product }) => 
-                    (<CartProduct product={Product} />)
+                { cart && cart.data?.map( ( product, index ) => 
+                    (<CartProduct 
+                        product={product.Product}
+                        id={product.id}
+                        index={index} 
+                    />)
                 )}
 
                 { cart.count !== cart.data.length && <Increment

@@ -21,7 +21,7 @@ const setProducts = (products: Products): ActionProducts => {
 
 
 
-export default {
+const ProductsActions = {
     setProducts,
 
     setPage,
@@ -31,3 +31,5 @@ export default {
     incrementPage: () => ({ type: PRODUCTS_TYPE.INCREMENT_PAGE }),
     decrementPage: () => ({ type: PRODUCTS_TYPE.DECREMENT_PAGE })
 };
+
+export default ProductsActions;

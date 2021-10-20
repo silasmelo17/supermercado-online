@@ -17,20 +17,20 @@ function AccountMenu({ match }: RouteComponentProps ) {
             <AccountMenuItem selected={match.url.includes('/account/address')}>
                 <Link to="/account/addresses">Endereços</Link>
             </AccountMenuItem>
-            <AccountMenuItem selected={false}>
-                <Link to="/">Cartões</Link>
+            <AccountMenuItem selected={match.url.includes('/account/cards')}>
+                <Link to="/account/cards">Cartões</Link>
             </AccountMenuItem>
             <AccountMenuItem selected={match.url === '/account/favorites'}>
                 <Link to="/account/favorites">Lista de Desejos</Link>
             </AccountMenuItem>
-            <AccountMenuItem selected={false}>
+            <AccountMenuItem selected={match.url.includes('/account/cart')}>
                 <Link to="/account/cart">Carrinho</Link>
             </AccountMenuItem>
             <AccountMenuItem selected={false}>
-                <Link to="/">Meus pedidos</Link>
+                <Link to="/account/orders">Meus pedidos</Link>
             </AccountMenuItem>
             <AccountMenuItem selected={false}>
-                <Link to="/">Configuração</Link>
+                <Link to="/account/configuration">Configuração</Link>
             </AccountMenuItem>
         </AccountMenuContainer>
     );

@@ -6,7 +6,7 @@ import GlobalState from '../types/reduxState/GlobalState';
 import Header from '../types/reduxState/Header';
 import Products from '../types/reduxState/Products';
 import Favorites from '../types/reduxState/Favorites';
-import Cart from '../types/reduxState/Cart';
+import StateCart from '../types/reduxState/StateCart';
 
 
 
@@ -33,7 +33,7 @@ export const INITIAL_ACCOUNT_FAVORITES: Favorites = {
     data: []
 }
 
-export const INITIAL_ACCOUNT_CART: Cart =  {
+export const INITIAL_ACCOUNT_CART: StateCart =  {
     count: 0,
     limit: 10,
     offset: 0,
@@ -54,7 +54,6 @@ export const INITIAL_HEADER_STATE: Header = {
     suggestions: [],
     view: true
 }
-
 
 const INITIAL_STATE: GlobalState = {
     authentication: INITIAL_AUTH_STATE,

@@ -6,6 +6,7 @@ import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 import * as FavoritesAction from './actions';
+import ProductsAction from '../products/actions';
 
 import Favorites from '../../types/reduxState/Favorites';
 import GlobalState from '../../types/reduxState/GlobalState';
@@ -31,6 +32,22 @@ export const findFavoritesProducts = () =>
         dispatch( FavoritesAction.setFavorites(data) );
     }
 
+export const toggleFavoriteProduct = ( id: number, index: number ) => 
+    async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState ) => {
+        const { token } = getState().authentication;
+
+        const {status}: AxiosResponse<any> = await axios
+            .post<any, any>( `/favorites/product/${id}`, {}, { headers: {token}} )
+
+        const favorite = status === 201 
+            ? true 
+            : status === 200
+        dispatch( ProductsAction
+            .updateProductByIndex( index, { id, favorite }) );
+    }
+
+
+    
 export const removeFavoriteFromList = ( id: number ) => 
     async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState ) => {
         const state = getState();
@@ -47,9 +64,6 @@ export const removeFavoriteFromList = ( id: number ) =>
 export const incrementFavorites = () => 
     async(dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState ) => {
         const state = getState();
-
-        console.log('state', state)
-
         const { token } = state.authentication;
         
         const {data} = await axios.get<Favorites>( `/favorites/user/`, {

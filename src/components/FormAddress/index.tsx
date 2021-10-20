@@ -117,7 +117,7 @@ function FormAddress( { token, method, address }: Props ) {
 
 
     const onBlurSuccessCPF = () => setSuccessCPF( () => {
-        return cpf.length === 0
+        return cpf.replace( /[^0-9]/g, '' ).length === 0
             ? undefined
             : cpf.replace( /[^0-9]/g, '' ).length === 11
     });

@@ -24,6 +24,7 @@ import AccountAddress from '../pages/AccountAddress';
 import AccountAddresses from '../pages/AccountAddresses';
 import AccountAddressesRegister from '../pages/AccountAddressesRegister';
 import AccountCart from '../pages/AccountCart';
+import Loading from '../pages/Loading';
 
 
 
@@ -39,6 +40,7 @@ function Routes({ auth, loading, token, tokenAuthentication }: Props) {
     }, [auth, token]);
 
     return (<>
+        {loading === true && <Loading />}
         {loading === false && <BrowserRouter>
             <Switch>
                 <Route exact path="/signin">

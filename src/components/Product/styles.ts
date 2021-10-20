@@ -33,12 +33,12 @@ export const ProductName = styled.span`
 `;
 
 
-export const BuyProduct = styled.button`
+export const BuyProduct = styled.button<{ remove?: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background: #067BF9;
+    background: ${ ({ remove }) => remove ? "red": "#067BF9" };
     color: white;
     padding: 8px 16px;
     cursor: pointer;
