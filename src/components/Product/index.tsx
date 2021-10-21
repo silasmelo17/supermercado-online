@@ -2,10 +2,6 @@
 import { Link } from 'react-router-dom';
 import { FaCartPlus, FaTrash } from 'react-icons/fa';
 
-import { AxiosResponse } from 'axios';
-
-import axios from '../../config/axios.config';
-
 import connector, { Props } from './connector';
 
 import { 

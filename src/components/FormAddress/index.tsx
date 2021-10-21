@@ -60,7 +60,7 @@ function FormAddress( { token, method, address }: Props ) {
 
 
 
-    const onBlurCEP = async () => {
+    const onBlurSuccessCEP = async () => {
         try{
             if(cep.replace('-','').length === 8) {
                 const url = `https://viacep.com.br/ws/${cep}/json`
@@ -139,7 +139,7 @@ function FormAddress( { token, method, address }: Props ) {
     useEffect( () => {
         setCEP('')
         resetSomeFields();
-    }, [withCEP, resetSomeFields ]);
+    }, [withCEP]);
 
 
 
@@ -152,7 +152,7 @@ function FormAddress( { token, method, address }: Props ) {
             const body = { name, cpf, cep, complement, references, number }
             const headers = { headers: { token } }
 
-            api.post( '/address', body, headers )
+            api.post( '/addresses', body, headers )
                 .then( result => {
                     if(result.status === 201 ) {
                         alert(`Endereço cadastrado com sucesso.`);
@@ -188,8 +188,8 @@ function FormAddress( { token, method, address }: Props ) {
     }
 
     const onClick = method === 'post'
-            ? onClickSaveAddress
-            : onClickUpdateAddress
+        ? onClickSaveAddress
+        : onClickUpdateAddress
 
 
     return(<>
@@ -221,12 +221,11 @@ function FormAddress( { token, method, address }: Props ) {
             <ColumnContainer style={{ maxWidth: 150 }}>
                 <Label>CEP</Label>
                 <InputWithMask
-                    mask="99999-999" 
-                    disabled={(!withCEP)} 
-                    success={successCEP}
+                    mask="99999-999"
+                    success={successCEP} 
                     value={cep} 
-                    onChange={ e => setCEP(e.target.value) }
-                    onBlur={onBlurCEP}
+                    onChange={ e => setCEP(e.target.value)}
+                    onBlur={onBlurSuccessCEP}
                 />
             </ColumnContainer>
 
@@ -307,7 +306,7 @@ function FormAddress( { token, method, address }: Props ) {
                 type="text" 
                 value={complement} 
                 success={successComplement}
-                onChange={ e => setComplement(e.target.value) }
+                onChange={ e => setComplement(e.target.value)}
                 onBlur={onBlurSuccessComplement}
             />
         </ColumnContainer>
