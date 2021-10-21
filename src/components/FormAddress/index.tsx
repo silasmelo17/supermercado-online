@@ -225,7 +225,10 @@ function FormAddress( { token, method, address }: Props ) {
                     disabled={(!withCEP)} 
                     success={successCEP}
                     value={cep} 
-                    onChange={ e => setCEP(e.target.value) }
+                    onChange={ e => {
+                        console.log(e.target.value);
+                        setCEP(e.target.value);
+                    }}
                     onBlur={onBlurCEP}
                 />
             </ColumnContainer>
@@ -307,7 +310,7 @@ function FormAddress( { token, method, address }: Props ) {
                 type="text" 
                 value={complement} 
                 success={successComplement}
-                onChange={ e => setComplement(e.target.value) }
+                onChange={ e => setComplement(e.target.value)}
                 onBlur={onBlurSuccessComplement}
             />
         </ColumnContainer>

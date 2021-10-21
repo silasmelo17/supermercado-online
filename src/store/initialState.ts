@@ -7,12 +7,17 @@ import Header from '../types/reduxState/Header';
 import Products from '../types/reduxState/Products';
 import Favorites from '../types/reduxState/Favorites';
 import StateCart from '../types/reduxState/StateCart';
+import StateLoading from '../types/reduxState/Loading';
 
 
 
 export const INITIAL_AUTH_STATE: Authentication = {
     auth: false,
     token: localStorage.getItem('token') || ''
+}
+
+export const INITIAL_LOADING_STATE: StateLoading = {
+    loader: []
 }
 
 export const INITIAL_PRODUCTS_STATE: Products = {
