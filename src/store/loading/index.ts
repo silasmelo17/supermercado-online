@@ -12,8 +12,6 @@ export interface LoadingAction extends AnyAction{
 }
 
 function loadingReducer( state: StateLoading = INITIAL_LOADING_STATE, action: LoadingAction ) {
-    console.log(state);
-
     switch(action.type) {
         case LoadingTypes.ADD_LOADING:
             const loader = [ ...state.loader, action.loading ];

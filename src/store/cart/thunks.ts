@@ -1,21 +1,19 @@
 
-import { AnyAction } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
-
 import { AxiosResponse } from 'axios';
 import axios from '../../config/axios.config';
 
 import ProductsActions from '../products/actions';
 import * as CartActions from './actions';
 
-import GlobalState from '../../types/reduxState/GlobalState';
 import StateCart from '../../types/reduxState/StateCart';
 import Cart from '../../types/reduxState/Cart';
+
+import { ThunkGlobalDispatch, getGlobalState } from '../ThunkTypes';
 
 
 
 export const findCartProducts = () =>
-    async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState) => {
+    async (dispatch: ThunkGlobalDispatch, getState: getGlobalState) => {
         const state = getState();
 
         const { token } = state.authentication;
@@ -34,7 +32,7 @@ export const findCartProducts = () =>
     }
 
 export const addProductInCart = (product_id: number, index: number) =>
-    async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState) => {
+    async (dispatch: ThunkGlobalDispatch, getState: getGlobalState) => {
         const { token } = getState().authentication;
 
         const { data, status } = await axios.post<any, AxiosResponse<Cart>>(
@@ -54,7 +52,7 @@ export const addProductInCart = (product_id: number, index: number) =>
     }
 
 export const removeProductInCart = (id: number, index: number) =>
-    async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState) => {
+    async (dispatch: ThunkGlobalDispatch, getState: getGlobalState) => {
         const state = getState();
         const { token } = state.authentication;
         const { data } = state.products;

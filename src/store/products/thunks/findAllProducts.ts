@@ -22,8 +22,6 @@ function findAllProducts() {
             params: { limit, page }
         });
 
-        console.log( 'thunk find all products',  data);
-
         dispatch( ActionsProducts.setProducts({...data}) );
     }
 }
