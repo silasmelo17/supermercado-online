@@ -13,7 +13,7 @@ const mapStateToProps = (state: GlobalState ) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
     loadFavorites: () => dispatch(FavoritesThunks.findFavoritesProducts()),
-    removeProduct: (id: number) => dispatch(FavoritesThunks.removeFavoriteFromList(id)),
+    removeProduct: (id: number, index: number) => dispatch(FavoritesThunks.removeFavoriteFromList(id, index)),
     incrementFavorites: () => dispatch(FavoritesThunks.incrementFavorites()),
     resetFavorites: () => dispatch(FavoritesActions.resetFavorites())
 });

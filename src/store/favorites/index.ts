@@ -9,11 +9,14 @@ import * as FavoritesTypes from './types';
 
 
 
-type FavoritesAction = Action & Favorites & Favorite;
+export interface ActionFavorite extends Action {
+    payload?: Favorites,
+    index?: number
+}
 
 
 
-function favoriteReducer( state: Favorites = INITIAL_ACCOUNT_FAVORITES, action: FavoritesAction) {
+function favoriteReducer( state: Favorites = INITIAL_ACCOUNT_FAVORITES, action: ActionFavorite) {
     switch(action.type) {
         case FavoritesTypes.RESET_FAVORITES:
             return {
@@ -23,27 +26,23 @@ function favoriteReducer( state: Favorites = INITIAL_ACCOUNT_FAVORITES, action: 
         case FavoritesTypes.SET_FAVORITES: 
             return {
                 ...state,
-                limit: action.limit,
-                page: action.page,
-                count: action.count,
-                offset: action.offset,
-                data: action.data
+                ...action?.payload
             }
         case FavoritesTypes.REMOVE_FAVORITE:
             return {
                 ...state,
                 offset: state.offset-1,
                 count: state.count-1,
-                data: state.data?.filter( (f) => f.id !== action.id )
+                data: state.data?.filter( (_, i) => i !== action.index )
             }
         case FavoritesTypes.INCREMENT_FAVORITE:
+            const { payload } = action;
+            const increment: Favorite[] = payload?.data || [];
+
             return {
                 ...state,
-                limit: action.limit,
-                page: action.page,
-                count: action.count,
-                offset: action.offset,
-                data: [ ...state.data, ...action.data ]
+                ...payload,
+                data: [ ...state.data, ...increment ]
             }
         default: 
             return state;

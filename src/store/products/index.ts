@@ -56,12 +56,15 @@ function productsReducer( state: Products = INITIAL_PRODUCTS_STATE, action: Acti
             }
         case PRODUCTS_TYPE.UPDATE_PRODUCT:   
             const { update } = action;
+
             if( update ) {
                 const { index, product } = update;
 
                 const copy = [ ...state.data ];
                 if(copy[index])
                     copy[index] = { ...copy[index], ...product };
+
+                console.log(copy);    
 
                 return {
                     ...state,

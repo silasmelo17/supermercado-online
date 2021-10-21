@@ -36,19 +36,18 @@ export const toggleFavoriteProduct = ( id: number, index: number ) =>
     async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState ) => {
         const { token } = getState().authentication;
 
-        const {status}: AxiosResponse<any> = await axios
+        const {data}: AxiosResponse<any> = await axios
             .post<any, any>( `/favorites/product/${id}`, {}, { headers: {token}} )
+        
+        console.log(data);
 
-        const favorite = status === 201 
-            ? true 
-            : status === 200
         dispatch( ProductsAction
-            .updateProductByIndex( index, { id, favorite }) );
+            .updateProductByIndex( index, { id, Favorites: data }) );
     }
 
 
     
-export const removeFavoriteFromList = ( id: number ) => 
+export const removeFavoriteFromList = ( id: number, index: number ) => 
     async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState ) => {
         const state = getState();
 
@@ -57,8 +56,10 @@ export const removeFavoriteFromList = ( id: number ) =>
         const result: AxiosResponse<any> = await axios.post<any, any>( `/favorites/product/${id}`, {}, { headers: {token}} )
             .catch( (err: AxiosError) => {} );
 
+        console.log(result);
+
         if(result.status === 200 )
-            dispatch(FavoritesAction.removeFavorite(result.data));
+            dispatch(FavoritesAction.removeFavorite(index));
     }
 
 export const incrementFavorites = () => 

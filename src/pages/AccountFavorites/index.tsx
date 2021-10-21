@@ -27,7 +27,7 @@ function AccountFavorites( { favorites, loadFavorites, removeProduct, incrementF
 
 
 
-    const FavoriteProduct = ({product}: { product: Product} )=> (<ProductContainer>
+    const FavoriteProduct = ({product, index}: { product: Product, index: number} )=> (<ProductContainer>
         <ProductContainerColumn>
             <ProductImage src={product.image_src} />
             <ProductName>
@@ -36,7 +36,7 @@ function AccountFavorites( { favorites, loadFavorites, removeProduct, incrementF
         </ProductContainerColumn>
 
         <ProductContainerColumn>
-            <Remove onClick={ () => removeProduct(product.id) }>
+            <Remove onClick={ () => removeProduct(product.id, index ) }>
                 <FaTrash size={22} />
             </Remove>
             <BuyProduct>
@@ -52,8 +52,8 @@ function AccountFavorites( { favorites, loadFavorites, removeProduct, incrementF
             {favorites.count === 0 && <WishlistEmpty>Nenhum produto favoritado.</WishlistEmpty>}
 
             <ListProductContainer>
-                { favorites && favorites.data?.map( ({ Product }) => 
-                    (<FavoriteProduct product={Product} />)
+                { favorites && favorites.data?.map( (product, index) => 
+                    (<FavoriteProduct product={product.Product} index={index} />)
                 )}
 
                 { favorites.count !== favorites.data.length && <IncrementFavorites 
