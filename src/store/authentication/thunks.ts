@@ -15,7 +15,6 @@ import * as UserAction from '../user/actions';
 
 export const userAuthentication = ( email: string, password: string ) => 
     async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>) => {
-        await new Promise((r) => setTimeout(() => r(true), 5000) )
 
         const { data } = await axios.post<any, AxiosResponseAuthentication >(`/user/signin/`,
             { email, password }
