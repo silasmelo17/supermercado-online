@@ -20,6 +20,11 @@ export const Form = styled.form`
     background: white;
 `;
 
+export const FormTitle = styled.h2`
+    margin-bottom: 40px;
+    text-align: center;
+`;
+
 export const Container = styled.div`
     display: flex;
     display: row;

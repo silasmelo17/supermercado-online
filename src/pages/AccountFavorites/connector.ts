@@ -5,10 +5,13 @@ import GlobalState from '../../types/reduxState/GlobalState';
 import * as FavoritesThunks from '../../store/favorites/thunks';
 import * as FavoritesActions from '../../store/favorites/actions';
 
+import * as ThunksCart from '../../store/cart/thunks';
+
 
 
 const mapStateToProps = (state: GlobalState ) => ({
-    favorites: state.account?.favorites
+    favorites: state.account?.favorites,
+    auth: state.authentication.auth
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

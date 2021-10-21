@@ -16,7 +16,7 @@ function AccountAddress( { addresses, match }: Props ) {
         <TemplateAccount title="Endereços" subtitle="Editar endereço" >
             <FormAddress method="put" address={{
                 ...address,
-                cep: address?.cep.replace( '-', '' ) || ''
+                cep: address?.cep.replace( '-', '' )
             }} />
         </TemplateAccount>
     );

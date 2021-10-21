@@ -11,12 +11,7 @@ function Account( {user}: Props) {
         <TemplateAccount subtitle="Dados Pessoais">
             <FieldContainer>
                 <FieldName>Nome: </FieldName>
-                <FieldValue>{user?.name}</FieldValue>
-            </FieldContainer>
-
-            <FieldContainer>
-                <FieldName>Sobrenome: </FieldName>
-                <FieldValue>{user?.last_name}</FieldValue>
+                <FieldValue>{user?.name} {user?.last_name}</FieldValue>
             </FieldContainer>
 
             <FieldContainer>

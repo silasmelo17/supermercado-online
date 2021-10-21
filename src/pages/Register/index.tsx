@@ -9,7 +9,7 @@ import connector, { Props } from "./connector";
 import Header from '../../components/Header';
 
 import { 
-    Form,
+    Form, FormTitle,
     Label, Input, InputWithMask,
     Button, ButtonHighlight, 
     Container, ColumnContainer 
@@ -180,6 +180,9 @@ function Register({ auth, ocultHeader }: Props) {
     return(<>
         <Header />
         <Form onSubmit={onSubmitRegister} autoComplete="off" >
+            <FormTitle>Cadastrar novo usuário</FormTitle>
+
+            <Container>
             <ColumnContainer>
                 <Label>Nome</Label>
                 <Input 
@@ -203,32 +206,35 @@ function Register({ auth, ocultHeader }: Props) {
                     placeholder="Informe seu sobrenome"
                 />
             </ColumnContainer>
+            </Container>
 
-            <ColumnContainer>
-                <Label>CPF</Label>
-                <InputWithMask 
-                    type="text"
-                    mask="999.999.999-99"
-                    success={successCPF}
-                    value={cpf}
-                    onChange={ e => setCpf(e.target.value)}
-                    onBlur={onBlurSuccessCPF}
-                    placeholder="Informe seu CPF"
-                />
-            </ColumnContainer>
+            <Container>
+                <ColumnContainer>
+                    <Label>CPF</Label>
+                    <InputWithMask 
+                        type="text"
+                        mask="999.999.999-99"
+                        success={successCPF}
+                        value={cpf}
+                        onChange={ e => setCpf(e.target.value)}
+                        onBlur={onBlurSuccessCPF}
+                        placeholder="Informe seu CPF"
+                    />
+                </ColumnContainer>
 
-            <ColumnContainer>
-                <Label>Telefone</Label>
-                <InputWithMask 
-                    type="text"
-                    mask="(99)99999-9999"
-                    success={successPhone}
-                    value={phone}
-                    onChange={ e => setPhone(e.target.value)}
-                    onBlur={onBlurSuccessPhone}
-                    placeholder="Informe seu telefone"
-                />
-            </ColumnContainer>
+                <ColumnContainer>
+                    <Label>Telefone</Label>
+                    <InputWithMask 
+                        type="text"
+                        mask="(99)99999-9999"
+                        success={successPhone}
+                        value={phone}
+                        onChange={ e => setPhone(e.target.value)}
+                        onBlur={onBlurSuccessPhone}
+                        placeholder="Informe seu telefone"
+                    />
+                </ColumnContainer>
+            </Container>
 
             <ColumnContainer>
                 <Label>Data de nascimento</Label>

@@ -1,10 +1,9 @@
 
 import { useEffect } from "react";
 import { FaPlus, FaTrash, FaCartPlus } from "react-icons/fa";
+import BuyProductButton from "../../components/BuyButton";
 
 import TemplateAccount from "../../templates/TemplateAccount";
-
-import { BuyProduct } from "../../components/Product/styles";
 
 import Product from "../../types/objects/Product";
 
@@ -18,12 +17,14 @@ import {
 
 
 
-function AccountFavorites( { favorites, loadFavorites, removeProduct, incrementFavorites, resetFavorites }: Props ) {
+function AccountFavorites( { auth, favorites, loadFavorites, removeProduct, incrementFavorites, resetFavorites }: Props ) {
     
     useEffect( () => {
-        resetFavorites();
-        loadFavorites();
-    }, [loadFavorites, resetFavorites])
+        if(auth) {
+            resetFavorites();
+            loadFavorites();
+        }
+    }, []);
 
 
 
@@ -39,10 +40,11 @@ function AccountFavorites( { favorites, loadFavorites, removeProduct, incrementF
             <Remove onClick={ () => removeProduct(product.id, index ) }>
                 <FaTrash size={22} />
             </Remove>
-            <BuyProduct>
-                <FaCartPlus style={{ marginRight: 8 }} />
-                Adicionar
-            </BuyProduct>
+            <BuyProductButton
+                onClick={ () => {} }
+                cart={false} 
+                product={product}  
+            />
         </ProductContainerColumn>
     </ProductContainer>);
 
@@ -53,7 +55,7 @@ function AccountFavorites( { favorites, loadFavorites, removeProduct, incrementF
 
             <ListProductContainer>
                 { favorites && favorites.data?.map( (product, index) => 
-                    (<FavoriteProduct product={product.Product} index={index} />)
+                    (<FavoriteProduct key={`favorites___${index}`}  product={product.Product} index={index} />)
                 )}
 
                 { favorites.count !== favorites.data.length && <IncrementFavorites 
