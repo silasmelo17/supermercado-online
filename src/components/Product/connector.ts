@@ -10,7 +10,7 @@ import * as ThunksFavorite from '../../store/favorites/thunks';
 
 
 const mapStateToProps = (state: GlobalState) => ({
-    auth: state.authentication
+    auth: state.authentication.auth
 });
 
 const mapDispatchToProps = (dispatch: any) => ({

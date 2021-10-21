@@ -15,6 +15,11 @@ const global = createGlobalStyle`
         outline: none;
     }
 
+    html, body, #root {
+        min-width: 100%;
+        min-height: 100%;
+    }
+
     ul, ol {
         list-style: none;   
     }
