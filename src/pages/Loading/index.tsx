@@ -1,14 +1,13 @@
 
-import { FaSpinner } from 'react-icons/fa';
-
-import { LoadingContainer } from "./styles";
+import { LoadingContainer, Spinner } from "./styles";
 
 
 
 function Loading() {
+
     return(
         <LoadingContainer>
-            <FaSpinner color="white" size={32} />
+            <Spinner />
         </LoadingContainer>
     )
 }
