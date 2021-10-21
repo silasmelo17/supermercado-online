@@ -17,7 +17,8 @@ export const INITIAL_AUTH_STATE: Authentication = {
 }
 
 export const INITIAL_LOADING_STATE: StateLoading = {
-    loader: []
+    loader: [],
+    now: false
 }
 
 export const INITIAL_PRODUCTS_STATE: Products = {
@@ -63,7 +64,8 @@ const INITIAL_STATE: GlobalState = {
     authentication: INITIAL_AUTH_STATE,
     products: INITIAL_PRODUCTS_STATE,
     account: INITIAL_ACCOUNT_STATE,
-    header: INITIAL_HEADER_STATE
+    header: INITIAL_HEADER_STATE,
+    loading: INITIAL_LOADING_STATE
 };
 
 
