@@ -62,29 +62,25 @@ function Routes({ auth, token, loading, tokenAuthentication }: Props) {
                 <Route exact path="/products/category/:id">
                     <ProductsByCategory />
                 </Route>
-
-                { !auth 
-                    ? <Redirect to="/signin" /> 
-                    : <>
-                        <Route exact path="/account">
-                            <Account />
-                        </Route>
-                        <Route exact path="/account/favorites">
-                            <AccountFavorites />
-                        </Route>
-                        <Route exact path="/account/addresses">
-                            <AccountAddresses />
-                        </Route>
-                        <Route exact path="/account/addresses/register">
-                            <AccountAddressesRegister />
-                        </Route>
-                        <Route exact path="/account/address/:id" >
-                            <AccountAddress />
-                        </Route>
-                        <Route exact path="/account/cart">
-                            <AccountCart />
-                        </Route>
-                    </>}
+                
+                <Route exact path="/account">
+                    <Account />
+                </Route>
+                <Route exact path="/account/favorites">
+                    <AccountFavorites />
+                </Route>
+                <Route exact path="/account/addresses">
+                    <AccountAddresses />
+                </Route>
+                <Route exact path="/account/addresses/register">
+                    <AccountAddressesRegister />
+                </Route>
+                <Route exact path="/account/address/:id" >
+                    <AccountAddress />
+                </Route>
+                <Route exact path="/account/cart">
+                    <AccountCart />
+                </Route>
             </Switch>
         </BrowserRouter>}
     </>);
