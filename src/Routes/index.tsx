@@ -28,8 +28,8 @@ import Loading from '../pages/Loading';
 
 
 
-function Routes({ auth, token, tokenAuthentication }: Props) {
-    
+function Routes({ auth, token, loading, tokenAuthentication }: Props) {
+
     useEffect(() => {
         tokenAuthentication();
     }, [tokenAuthentication]);
@@ -43,7 +43,8 @@ function Routes({ auth, token, tokenAuthentication }: Props) {
 
 
     return (<>
-        <BrowserRouter>
+        {loading && <Loading />}
+        {loading === false && <BrowserRouter>
             <Switch>
                 <Route exact path="/signin">
                     {auth ? <Redirect to="/" /> : <SignIn />}
@@ -62,8 +63,8 @@ function Routes({ auth, token, tokenAuthentication }: Props) {
                     <ProductsByCategory />
                 </Route>
 
-                {!auth
-                    ? <Redirect to="/signin" />
+                { !auth 
+                    ? <Redirect to="/signin" /> 
                     : <>
                         <Route exact path="/account">
                             <Account />
@@ -85,7 +86,7 @@ function Routes({ auth, token, tokenAuthentication }: Props) {
                         </Route>
                     </>}
             </Switch>
-        </BrowserRouter>
+        </BrowserRouter>}
     </>);
 }
 
