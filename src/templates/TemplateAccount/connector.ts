@@ -7,6 +7,7 @@ import GlobalState from '../../types/reduxState/GlobalState';
 
 
 const mapStateToProps = (state: GlobalState) => ({ 
+    auth: state.authentication.auth,
     user: state.account.user
 });
 
