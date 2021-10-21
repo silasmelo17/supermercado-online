@@ -38,7 +38,7 @@ function FormAddress( { token, method, address }: Props ) {
     const [ successNumber, setSuccessNumber ] = useState<boolean | undefined>();
     const [ successComplement, setSuccessComplement ] = useState<boolean | undefined>();
 
-    const [ withCEP, setWithCEP ] = useState<boolean>(true);
+    const [ withCEP ] = useState<boolean>(true);
 
 
     
@@ -293,7 +293,7 @@ function FormAddress( { token, method, address }: Props ) {
         </Container>
 
         <ColumnContainer style={{ marginTop: 10, justifyContent: 'flex-end' }}>
-            <ToggleCEPMode onClick={() => setWithCEP( old => !old )} >
+            <ToggleCEPMode>
                 { withCEP 
                     ? 'Não sei meu CEP.'
                     : 'Não sei meu endereço.' 
