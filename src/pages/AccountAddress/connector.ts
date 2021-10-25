@@ -6,13 +6,10 @@ import GlobalState from '../../types/reduxState/GlobalState';
 
 
 
-const mapStateToProps = (state: GlobalState ) => {
-    console.log(state);
-
-    return {
-        addresses: state.account.addresses
-    }
-};
+const mapStateToProps = (state: GlobalState ) => ({
+    token: state.authentication.token,
+    addresses: state.account.addresses
+});
 
 const connector = connect( mapStateToProps );
 

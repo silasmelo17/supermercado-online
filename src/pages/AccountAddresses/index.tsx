@@ -26,7 +26,10 @@ function AccountAddresses({ addresses, loadAddresses }: Props ) {
                 )}
             </ListAddresses>
 
-            <ButtonLink style={{ marginLeft: 'auto' }} to="/account/addresses/register">
+            <ButtonLink 
+                to="/account/addresses/register"
+                style={{ marginLeft: 'auto' }}
+            >
                 Adicionar novo endereço
             </ButtonLink>
         </TemplateAccount>

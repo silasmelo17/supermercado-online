@@ -156,11 +156,13 @@ function FormAddress( { token, method, address }: Props ) {
                 .then( result => {
                     if(result.status === 201 ) {
                         alert(`Endereço cadastrado com sucesso.`);
+                        window.location.href = "/account/addresses"
                     }
                 })
                 .catch( (err: AxiosError<{ message: string }>) => {
-                    if(err.response)
+                    if(err.response) {
                         alert(err.response.data.message)
+                    }
                 });
         }
     }
@@ -190,6 +192,31 @@ function FormAddress( { token, method, address }: Props ) {
     const onClick = method === 'post'
         ? onClickSaveAddress
         : onClickUpdateAddress
+    
+    const onClickClearAll = () => {
+        setName('');
+        setCPF('');
+        setCEP('');
+        setState('');
+        setCity('');
+        setNeighborhood('');
+        setStreet('');
+        setNumber(0);
+        setComplement('');
+        setReferences('');
+
+        setTimeout( () => {
+            onBlurSuccessName();
+            onBlurSuccessCity();
+            onBlurSuccessCEP();
+            onBlurSuccessNeighborhood();
+            onBlurSuccessStreet();
+            onBlurSuccessComplement();
+            onBlurSuccessCPF();
+            onBlurSuccessState();
+            onBlurSuccessNumber();
+        }, 100 );
+    }
 
 
     return(<>
@@ -205,7 +232,7 @@ function FormAddress( { token, method, address }: Props ) {
                 />
             </ColumnContainer>
 
-            <ColumnContainer>
+            {method === "post" && <ColumnContainer>
                 <Label>CPF</Label>
                 <InputWithMask
                     mask="999.999.999-99"
@@ -214,7 +241,7 @@ function FormAddress( { token, method, address }: Props ) {
                     onChange={ e => setCPF(e.target.value) }
                     onBlur={onBlurSuccessCPF}
                 />
-            </ColumnContainer>
+            </ColumnContainer>}
         </Container>
 
         <Container>
@@ -311,7 +338,7 @@ function FormAddress( { token, method, address }: Props ) {
             />
         </ColumnContainer>
 
-        <ColumnContainer >
+        <ColumnContainer>
             <Label>Referência</Label>
             <Input
                 type="text" 
@@ -320,8 +347,8 @@ function FormAddress( { token, method, address }: Props ) {
             />
         </ColumnContainer>
 
-        <Container > 
-            <Button>
+        <Container style={{ marginTop: 60 }} > 
+            <Button onClick={onClickClearAll}>
                 Limpar campos
             </Button>
             <ButtonHighlight 
