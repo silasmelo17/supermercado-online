@@ -15,7 +15,7 @@ import connector, { Props } from "./connector";
 
 
 
-function AccountAddress( { token, addresses, match }: Props ) {
+function AccountAddress( { token, match }: Props ) {
     const [ address, setAddress ] = useState<Address | undefined>();
 
     useEffect( () => {
@@ -39,7 +39,7 @@ function AccountAddress( { token, addresses, match }: Props ) {
 
     return(
         <TemplateAccount title="Endereços" subtitle="Editar endereço" >
-            { address && <FormAddress method="put" address={{
+            { address && <FormAddress method="put" id={match.params.id} address={{
                 ...address
             }} />}
         </TemplateAccount>

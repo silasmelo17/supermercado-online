@@ -11,7 +11,7 @@ function AddressComponent({ id, name, street, number, complement, neighborhood, 
     return (
         <AddressContainer>
             <Text style={{ marginBottom: 8 }}>{name}</Text>
-            <Text>{street}, {number}</Text>
+            <Text>{street}, {number}.</Text>
             <Text>{complement}</Text>
             <Text>{neighborhood}, {city} - {state}</Text>
             <Text>CEP: {cep}</Text>

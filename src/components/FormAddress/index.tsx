@@ -16,7 +16,7 @@ import axios, { AxiosError } from "axios";
 
 
 
-function FormAddress( { token, method, address }: Props ) {
+function FormAddress( { id, token, method, address }: Props ) {
     const [ name, setName ] = useState<string>( address?.name || '');
     const [ cpf, setCPF ] = useState<string>( address?.cpf || '');
     const [ cep, setCEP ] = useState<string>( address?.cep || '');
@@ -136,20 +136,17 @@ function FormAddress( { token, method, address }: Props ) {
 
 
 
-    useEffect( () => {
-        setCEP('')
-        resetSomeFields();
-    }, [withCEP]);
-
-
-
     const onClickSaveAddress = () => {
         const successes = [ successName, successCPF, successCEP, successNumber, successComplement ]
 
         const success = successes.find( value => value === false ) || true;
 
         if( success ) {
-            const body = { name, cpf, cep, complement, references, number }
+            const body = {
+                name, complement, references, number, 
+                cpf: cpf.replaceAll(".", "").replaceAll('-',""),
+                cep: cep.replace('-',"")
+            }
             const headers = { headers: { token } }
 
             api.post( '/addresses', body, headers )
@@ -173,13 +170,19 @@ function FormAddress( { token, method, address }: Props ) {
         const success = successes.find( value => value === false ) || true;
 
         if( success ) {
-            const body = { name, cpf, cep, complement, references, number }
+            const body = {
+                name, complement, references, number, 
+                cpf: cpf.replaceAll(".", "").replaceAll('-',""),
+                cep: cep.replace('-',"")
+            }
             const headers = { headers: { token } }
 
-            api.put( `/addresses/${1}`, body, headers )
+            api.put( `/addresses/${id}`, body, headers )
                 .then( result => {
-                    if(result.status === 201 ) {
-                        alert(`Endereço cadastrado com sucesso.`);
+                    if(result.status === 200 ) {
+                        alert(`Endereço atualizado com sucesso.`);
+
+                        window.location.href="/account/addresses"
                     }
                 })
                 .catch( (err: AxiosError<{ message: string }>) => {
@@ -189,34 +192,25 @@ function FormAddress( { token, method, address }: Props ) {
         }
     }
 
+    const onClickRemoveAddress = () => {
+        api.delete( `/addresses/${id}`, { headers: { token } })
+            .then( result => {
+                if(result.status === 200 ) {
+                    alert(`Endereço removido com sucesso.`);
+
+                    window.location.href="/account/addresses"
+                }
+            })
+            .catch( (err: AxiosError<{ message: string }>) => {
+                if(err.response)
+                    alert(err.response.data.message)
+            })
+    }
+
     const onClick = method === 'post'
         ? onClickSaveAddress
         : onClickUpdateAddress
     
-    const onClickClearAll = () => {
-        setName('');
-        setCPF('');
-        setCEP('');
-        setState('');
-        setCity('');
-        setNeighborhood('');
-        setStreet('');
-        setNumber(0);
-        setComplement('');
-        setReferences('');
-
-        setTimeout( () => {
-            onBlurSuccessName();
-            onBlurSuccessCity();
-            onBlurSuccessCEP();
-            onBlurSuccessNeighborhood();
-            onBlurSuccessStreet();
-            onBlurSuccessComplement();
-            onBlurSuccessCPF();
-            onBlurSuccessState();
-            onBlurSuccessNumber();
-        }, 100 );
-    }
 
 
     return(<>
@@ -348,9 +342,9 @@ function FormAddress( { token, method, address }: Props ) {
         </ColumnContainer>
 
         <Container style={{ marginTop: 60 }} > 
-            <Button onClick={onClickClearAll}>
-                Limpar campos
-            </Button>
+            { method === 'put' && <Button onClick={onClickRemoveAddress}>
+                Deletar Endereço
+            </Button>}
             <ButtonHighlight 
                 style={{ marginLeft: 10 }} 
                 onClick={onClick}

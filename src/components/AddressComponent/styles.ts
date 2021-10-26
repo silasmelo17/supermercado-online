@@ -16,7 +16,11 @@ export const AddressContainer = styled.article`
     border-radius: 4px;
 `;
 
-export const Text = styled.span``;
+export const Text = styled.span`
+    & + & {
+        margin-top: 10px;
+    }
+`;
 
 export const EditAddress = styled(Link)`
     position: absolute;

@@ -98,8 +98,8 @@ const BaseButton = styled.button`
     flex: 1;
     color: #333;
 
-    font-size: 18px;
-    padding: 10px 18px;
+    font-size: 17px;
+    padding: 8px 12px;
     cursor: pointer;
     border-radius: 4px;
 `;

@@ -18,7 +18,7 @@ const connector = connect( mapStateToProps, mapDispatchToProps );
 
 export interface Props extends ConnectedProps<typeof connector> {
     method: 'post' | 'put',
-
+    id?: number, 
     address?: {
         name?: string,
         cpf?: string,
