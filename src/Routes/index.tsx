@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 
 
+import Product from '../pages/Product';
 import Products from '../pages/Products';
 import ProductsByCategory from '../pages/ProductsByCategory';
 import ProductsByName from '../pages/ProductsByName';
@@ -52,9 +53,12 @@ function Routes({ auth, token, loading, tokenAuthentication }: Props) {
                 <Route exact path="/register">
                     {auth ? <Redirect to="/" /> : <Register />}
                 </Route>
-
+        
                 <Route exact path="/">
                     <Products />
+                </Route>
+                <Route exact path="/products/:id">
+                    <Product />
                 </Route>
                 <Route exact path="/products/name/:name">
                     <ProductsByName />
