@@ -70,7 +70,7 @@ export const TransparentButton = styled.button`
 `;
 
 export const IconContainer = styled.li`
-    position: relative;
+    /* position: relative; */
     display: flex ;
     align-items: center;
     justify-content: center;
