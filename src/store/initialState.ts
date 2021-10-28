@@ -57,7 +57,8 @@ export const INITIAL_ACCOUNT_STATE: Account = {
 
 export const INITIAL_HEADER_STATE: Header = {
     suggestions: [],
-    view: true
+    view: true,
+    categories: []
 }
 
 const INITIAL_STATE: GlobalState = {
