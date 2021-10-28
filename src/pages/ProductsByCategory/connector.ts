@@ -14,7 +14,8 @@ const connector = connect( undefined, mapDispatchProps );
 
 
 interface MatchParams {
-    id: string
+    id: string,
+    name: string
 }
 
 type PropsFromRedux = ConnectedProps<typeof connector>;

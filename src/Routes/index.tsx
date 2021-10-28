@@ -63,7 +63,7 @@ function Routes({ auth, token, loading, tokenAuthentication }: Props) {
                 <Route exact path="/products/name/:name">
                     <ProductsByName />
                 </Route>
-                <Route exact path="/products/category/:id">
+                <Route exact path="/products/category/:id/:name">
                     <ProductsByCategory />
                 </Route>
                 

@@ -17,7 +17,7 @@ function ProductsByCategory( { match, loadProducts }: Props ) {
 
     return(
         <TemplateProducts>
-            Lista de produtos da categoria {match.params.id}
+            Lista de produtos da categoria "{match.params.name}"
         </TemplateProducts>
     );
 }
