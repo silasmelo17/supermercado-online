@@ -1,17 +1,19 @@
 
-import { AnyAction } from 'redux'
-import { ThunkDispatch } from 'redux-thunk';
-
-import GlobalState from '../../types/reduxState/GlobalState';
+import { ThunkGlobalDispatch } from './../ThunkTypes'
 
 import axios from '../../config/axios.config';
-import { setSuggestions } from './actions';
+import { AxiosResponse } from 'axios';
+
+import { setSuggestions, setCategories } from './actions';
+
 import AxiosResponseProducts from '../../types/axiosResponse/AxiosResponseProducts';
+import Category from '../../types/objects/Category';
+
 
 
 
 export const findProductsSuggestions = (name: string) => 
-    async (dispatch: ThunkDispatch<GlobalState, void, AnyAction> ) => {
+    async (dispatch:ThunkGlobalDispatch ) => {
         const {data} = await axios.get<any,AxiosResponseProducts>( `/products/name/${name}`, {
             params: {
                 page: 1,
@@ -22,3 +24,11 @@ export const findProductsSuggestions = (name: string) =>
 
         dispatch( setSuggestions(data.data) );
     }
+
+export const findCategories = () =>
+    async(dispatch: ThunkGlobalDispatch ) => {
+        const categories = await axios
+            .get<any, AxiosResponse<Category[]>>( '/categories' );
+        dispatch( setCategories(categories.data) );
+    }
+    
