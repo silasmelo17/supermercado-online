@@ -12,6 +12,7 @@ export const DropDownContainer = styled.section<{ visible?: boolean }>`
 
     transition: opacity 200ms;
 
+
     position: absolute;
     left: 50%;
     top: 100%;

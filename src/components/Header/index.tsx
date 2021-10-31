@@ -24,6 +24,7 @@ import DropDownAuthenticated from '../DropDown/DropDownAuthenticated';
 function Header( { auth, view, loadSuggestions, loadCategories, clearSuggestions }: Props ) {
     const [ name, setName ] = useState<string>("");
     const [ visible, setVisible ] = useState<boolean>(false);
+    const [ visibleMenu, setVisibleMenu ] = useState<boolean>(false);
 
 
 
@@ -73,7 +74,7 @@ function Header( { auth, view, loadSuggestions, loadCategories, clearSuggestions
                 </SearchProductContainer>}
 
                 { (view === true || view === undefined ) && <ListIcons>
-                    <IconContainer>
+                    <IconContainer style={{ position: "relative"}} >
                         <Link to='/account'>
                             <FaUser size={18} 
                                 onMouseEnter={ () => setVisible(true) }
@@ -98,8 +99,11 @@ function Header( { auth, view, loadSuggestions, loadCategories, clearSuggestions
                     </IconContainer>}
 
                     <IconContainer>
-                        <FaBars size={18} />
-                        <DropDownMenu visible={true} />
+                        <FaBars 
+                            size={18} 
+                            onClick={ () => setVisibleMenu( old => !old )} 
+                        />
+                        <DropDownMenu visible={visibleMenu} />
                     </IconContainer>
                 </ListIcons>}
             </HeaderNavigation>

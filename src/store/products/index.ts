@@ -28,12 +28,7 @@ function productsReducer( state: Products = INITIAL_PRODUCTS_STATE, action: Acti
 
             return {
                 ...state,
-                data: payload?.data,
-                page: payload?.page,
-                limit: payload?.limit,
-                offset: payload?.offset,
-                count: payload?.count,
-                term: payload?.term
+                ...payload
             };
         case PRODUCTS_TYPE.SET_PAGE:
             const { pagination } = action;
@@ -63,8 +58,6 @@ function productsReducer( state: Products = INITIAL_PRODUCTS_STATE, action: Acti
                 const copy = [ ...state.data ];
                 if(copy[index])
                     copy[index] = { ...copy[index], ...product };
-
-                console.log(copy);    
 
                 return {
                     ...state,

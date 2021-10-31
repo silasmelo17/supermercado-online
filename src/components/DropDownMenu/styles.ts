@@ -1,14 +1,17 @@
 
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import { Link } from 'react-router-dom';
 
 
 
-export const MenuContainer = styled.nav`
+export const MenuContainer = styled.nav<{ visible: boolean }>`
     position: absolute;
     right: 0;
     top: 60px;
+
+    transform: translateX( ${ ({visible}) => visible ? 0: 100 }% );
+    opacity: ${ ({visible}) => visible ? 1: 0 };
 
     display: flex;
     flex-direction: column;
@@ -21,6 +24,8 @@ export const MenuContainer = styled.nav`
 
     border-left: 1px solid #efefef;
     box-shadow: -2px 0 8px #efefef;
+
+    transition: all 200ms ease-in-out;
 `;
 
 export const DropDown = styled.section`

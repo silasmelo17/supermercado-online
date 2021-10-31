@@ -1,4 +1,6 @@
 
+import { useEffect, useState } from 'react';
+
 import { MenuContainer, DropDown, DropDownTitle, DropDownItem, DropDownMenuLink } from './styles';
 
 import connector, { Props } from './connector';
@@ -6,10 +8,8 @@ import connector, { Props } from './connector';
 
 
 function DropDownMenu({ visible , categories }: Props) {
-
-
     return(
-        <MenuContainer>
+        <MenuContainer visible={visible} >
             <DropDown>
                 <DropDownTitle>Categorias</DropDownTitle>
 

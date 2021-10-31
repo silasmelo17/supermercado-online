@@ -3,9 +3,10 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { RouteComponentProps } from 'react-router';
 
-import findAllProductsByName from '../../store/products/thunks/findAllProductsByName';
+import { findProducts } from '../../store/products/thunks';
 
 import GlobalState from '../../types/reduxState/GlobalState';
+
 
 
 
@@ -16,8 +17,8 @@ const mapStateToProps = ( state: GlobalState) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    findProductsByName: (name: string) => dispatch( findAllProductsByName(name) )
-})
+    findProductsByName: (name: string) => dispatch( findProducts(`/products/name/${name}`) )
+});
 
 const connector = connect( mapStateToProps, mapDispatchToProps );
 

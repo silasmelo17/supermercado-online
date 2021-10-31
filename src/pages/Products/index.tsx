@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import connector, {Props} from './connector';
 
@@ -11,7 +11,7 @@ function Products( { page, limit, getAll }: Props ) {
 
     useEffect( () => {
         getAll();
-    }, [ page, limit ]);
+    }, [page,limit]);
 
     return(
         <TemplateProducts>

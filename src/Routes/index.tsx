@@ -45,7 +45,7 @@ function Routes({ auth, token, loading, tokenAuthentication }: Props) {
 
     return (<>
         {loading && <Loading />}
-        {loading === false && <BrowserRouter>
+        <BrowserRouter>
             <Switch>
                 <Route exact path="/signin">
                     {auth ? <Redirect to="/" /> : <SignIn />}
@@ -86,7 +86,7 @@ function Routes({ auth, token, loading, tokenAuthentication }: Props) {
                     <AccountCart />
                 </Route>
             </Switch>
-        </BrowserRouter>}
+        </BrowserRouter>
     </>);
 }
 
