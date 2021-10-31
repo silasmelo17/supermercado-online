@@ -9,7 +9,7 @@ import connector, { Props } from "./connector";
 import Header from '../../components/Header';
 
 import { 
-    Form,
+    Form, FormTitle,
     Label, Input, InputWithMask,
     Button, ButtonHighlight, 
     Container, ColumnContainer 
@@ -18,7 +18,7 @@ import {
 import { ValidationStep } from './styles';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import User from '../../types/User';
+import User from '../../types/objects/User';
 
 
 
@@ -77,7 +77,6 @@ function Register({ auth, ocultHeader }: Props) {
         })
         .catch( (err: AxiosError<any>) => {
             const responseError = err.response;
-
             setMessage( responseError?.data.message );
         });
     }
@@ -181,6 +180,7 @@ function Register({ auth, ocultHeader }: Props) {
     return(<>
         <Header />
         <Form onSubmit={onSubmitRegister} autoComplete="off" >
+            <FormTitle>Cadastrar novo usuário</FormTitle>
             <ColumnContainer>
                 <Label>Nome</Label>
                 <Input 

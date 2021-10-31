@@ -1,14 +1,29 @@
 
-import setProducts from "./setProducts";
+import Products from "../../../types/reduxState/Products";
+
 import setPage from "./setPage";
 import updateProductByIndex from "./updateProduct";
 
 import * as PRODUCTS_TYPE from "../types";
 
+import { ActionProducts } from '../index'
 
 
-const ActionProducts = {
+
+const setProducts = (products: Products): ActionProducts => {
+    console.log('set products', products)
+
+    return ({
+        type: PRODUCTS_TYPE.SET_ALL_PRODUCTS,
+        payload: { ...products }
+    });
+}
+
+
+
+const ProductsActions = {
     setProducts,
+
     setPage,
     updateProductByIndex,
 
@@ -17,4 +32,4 @@ const ActionProducts = {
     decrementPage: () => ({ type: PRODUCTS_TYPE.DECREMENT_PAGE })
 };
 
-export default ActionProducts;
+export default ProductsActions;

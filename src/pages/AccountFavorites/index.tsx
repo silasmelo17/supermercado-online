@@ -1,14 +1,11 @@
 
 import { useEffect } from "react";
 import { FaPlus, FaTrash, FaCartPlus } from "react-icons/fa";
+import BuyProductButton from "../../components/BuyButton";
 
-import TemplatePage from "../../templates/PageTemplate";
+import TemplateAccount from "../../templates/TemplateAccount";
 
-import AccountMenu from "../../components/AccountMenu";
-import { Container } from "../../components/Main";
-import { BuyProduct } from "../../components/Product/styles";
-
-import Product from "../../types/Product";
+import Product from "../../types/objects/Product";
 
 import connector, { Props } from "./connector";
 
@@ -20,16 +17,18 @@ import {
 
 
 
-function AccountFavorites( { favorites, loadFavorites, removeProduct, incrementFavorites, resetFavorites }: Props ) {
+function AccountFavorites( { auth, favorites, loadFavorites, removeProduct, incrementFavorites, resetFavorites }: Props ) {
     
     useEffect( () => {
-        resetFavorites();
-        loadFavorites();
-    }, [loadFavorites, resetFavorites])
+        if(auth) {
+            resetFavorites();
+            loadFavorites();
+        }
+    }, []);
 
 
 
-    const FavoriteProduct = ({product}: { product: Product} )=> (<ProductContainer>
+    const FavoriteProduct = ({product, index}: { product: Product, index: number} )=> (<ProductContainer>
         <ProductContainerColumn>
             <ProductImage src={product.image_src} />
             <ProductName>
@@ -38,39 +37,35 @@ function AccountFavorites( { favorites, loadFavorites, removeProduct, incrementF
         </ProductContainerColumn>
 
         <ProductContainerColumn>
-            <Remove onClick={ () => removeProduct(product.id) }>
+            <Remove onClick={ () => removeProduct(product.id, index ) }>
                 <FaTrash size={22} />
             </Remove>
-            <BuyProduct>
-                <FaCartPlus style={{ marginRight: 8 }} />
-                Adicionar
-            </BuyProduct>
+            <BuyProductButton
+                onClick={ () => {} }
+                cart={false} 
+                product={product}  
+            />
         </ProductContainerColumn>
     </ProductContainer>);
 
     return(
-        <TemplatePage>
-            <AccountMenu />
-            <Container>
-                <h2>Lista de Desejos.</h2>
+        <TemplateAccount subtitle="Lista de Desejos">
+            {favorites.count > 0 && <span>{favorites.count} produtos encontrados.</span>}
+            {favorites.count === 0 && <WishlistEmpty>Nenhum produto favoritado.</WishlistEmpty>}
 
-                {favorites.count > 0 && <span>{favorites.count} produtos encontrados.</span>}
-                {favorites.count === 0 && <WishlistEmpty>Nenhum produto favoritado.</WishlistEmpty>}
+            <ListProductContainer>
+                { favorites && favorites.data?.map( (product, index) => 
+                    (<FavoriteProduct key={`favorites___${index}`}  product={product.Product} index={index} />)
+                )}
 
-                <ListProductContainer>
-                    { favorites && favorites.data?.map( ({ Product }) => 
-                        (<FavoriteProduct product={Product} />)
-                    )}
-
-                    { favorites.count !== favorites.data.length && <IncrementFavorites 
-                        onClick={() => incrementFavorites()}
-                        disabled={favorites.count === favorites.data.length}
-                    >
-                        <FaPlus size={22} />
-                    </IncrementFavorites>}
-                </ListProductContainer>
-            </Container>
-        </TemplatePage>
+                { favorites.count !== favorites.data.length && <IncrementFavorites 
+                    onClick={() => incrementFavorites()}
+                    disabled={favorites.count === favorites.data.length}
+                >
+                    <FaPlus size={22} />
+                </IncrementFavorites>}
+            </ListProductContainer>
+        </TemplateAccount>
     );
 }
 

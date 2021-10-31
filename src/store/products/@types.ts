@@ -1,5 +1,5 @@
 
-import AxiosResponseProducts from '../../types/AxiosResponseProducts';
+import AxiosResponseProducts from '../../types/axiosResponse/AxiosResponseProducts';
 
 
 

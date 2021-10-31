@@ -1,59 +1,54 @@
 
-import { FaCartPlus } from 'react-icons/fa';
-
-import axios from '../../config/axios.config';
-import { AxiosError, AxiosResponse } from 'axios';
-
 import { Link } from 'react-router-dom';
 
 import connector, { Props } from './connector';
 
-import { 
-    BuyProduct, ProductContainer, ImageContainer, ProductImage, ProductName, 
+import {
+    ProductContainer, ImageContainer, ProductImage, ProductName,
     FavoriteProduct, FavoriteIcon
 } from './styles';
+import BuyProductButton from '../BuyButton';
 
 
 
-function Product( { token, auth, index, id, name, price, image_src, favorite, updateProduct }: Props) {
-    
-    const onClickFavoritedProduct = async () => {
-        const result: AxiosResponse<any> = await axios.post<any, any>( `/favorites/product/${id}`, {}, { headers: {token}} )
-            .catch( (err: AxiosError) => {} );
+function Product({ auth, index, favorite, cart, product, toggleFavorite, addProductInCart, removeProductInCart }: Props) {
 
-        if(result.status === 201 ) {
-            updateProduct( index, { id, favorite: true });
-        } else if( result.status === 200 ) {
-            updateProduct( index, { id, favorite: false });
-        }
+    const onClickBuyButton = () => {
+        const { id, Carts } = product;
+
+        cart && Carts
+            ? removeProductInCart(Carts.id, index)
+            : addProductInCart(id, index)
     }
 
-    return(
+
+    return (
         <ProductContainer>
-            {auth && <FavoriteProduct onClick={onClickFavoritedProduct} >
+            {auth && <FavoriteProduct onClick={() => toggleFavorite(product.id, index)} >
                 <FavoriteIcon favorite={favorite} />
             </FavoriteProduct>}
 
-            <Link to={`/products/${id}`}>
+            <Link to={`/products/${product.id}`}>
                 <ImageContainer>
-                    <ProductImage src={image_src} />
+                    <ProductImage src={product.image_src} />
                 </ImageContainer>
             </Link>
-            
+
             <ProductName>
-                {name}
+                {product.name}
             </ProductName>
             <span>
-                {new Intl.NumberFormat( 'pt-br' , { 
-                    style: 'currency' ,
+                {new Intl.NumberFormat('pt-br', {
+                    style: 'currency',
                     currency: 'BRL'
-                }).format(price || 0)}
+                }).format(product.price || 0)}
             </span>
 
-            <BuyProduct>
-                <FaCartPlus style={{ marginRight: 8 }} />
-                Adicionar
-            </BuyProduct>
+            <BuyProductButton
+                onClick={onClickBuyButton}
+                cart={cart}
+                product={product}
+            />
         </ProductContainer>
     )
 }

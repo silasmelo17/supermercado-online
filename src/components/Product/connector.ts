@@ -1,30 +1,40 @@
 
 import { connect, ConnectedProps } from 'react-redux';
-import GlobalState from '../../types/GlobalState';
+import GlobalState from '../../types/reduxState/GlobalState';
 
-import Product from '../../types/Product';
+import Product from '../../types/objects/Product';
 
-import ProductsAction from '../../store/products/actions/';
+import * as ThunksCart from '../../store/cart/thunks';
+import * as ThunksFavorite from '../../store/favorites/thunks';
 
 
 
 const mapStateToProps = (state: GlobalState) => ({
-    token: state.authentication.token,
     auth: state.authentication.auth
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    updateProduct: ( index: number, product: Product ) => dispatch( ProductsAction.updateProductByIndex(index, product))
+    toggleFavorite: (id: number, index: number ) => 
+        dispatch(ThunksFavorite.toggleFavoriteProduct(id,index) ),
+        
+    addProductInCart: (product_id: number, index: number) => 
+        dispatch(ThunksCart.addProductInCart(product_id, index) ),
+
+    removeProductInCart: (id: number, index: number) =>
+        dispatch(ThunksCart.removeProductInCart(id, index)) 
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
-type MergeTypes = PropsFromRedux & Product;
 
-export interface Props extends MergeTypes {
-    index: number
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export interface Props extends PropsFromRedux {
+    index: number,
+    product: Product,
+    favorite: boolean,
+    cart: boolean
 }
 
 export default connector;

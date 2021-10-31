@@ -19,8 +19,3 @@ export const signOutAuthentication = () => ({
     auth: false, 
     token: ''   
 });
-
-export const setLoadingAuthentication = ( loading: boolean ) => ({
-    type: AuthenticationTypes.SET_LOADING_AUTHENTICATION,
-    loading
-});

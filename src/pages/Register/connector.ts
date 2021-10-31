@@ -1,7 +1,7 @@
 
 import { connect, ConnectedProps } from 'react-redux';
 import { setHeaderView } from '../../store/header/actions';
-import GlobalState from '../../types/GlobalState';
+import GlobalState from '../../types/reduxState/GlobalState';
 
 
 

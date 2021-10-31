@@ -32,21 +32,6 @@ export const ProductName = styled.span`
     margin: 8px;
 `;
 
-
-export const BuyProduct = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: #067BF9;
-    color: white;
-    padding: 8px 16px;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-`;
-
-
 export const FavoriteProduct = styled.div`
     position: absolute;
     top: 10px;

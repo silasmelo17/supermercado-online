@@ -1,7 +1,4 @@
 
-import axios from './../../config/axios.config';
-import { AxiosResponse, AxiosError } from 'axios';
-
 import { useState, useEffect, FormEvent } from 'react';
 
 import { ButtonHighlight, Form, Input, ColumnContainer, Label } from '../../components/Forms/styles';
@@ -10,8 +7,6 @@ import { UserIcon, UserIconContainer, RightLink, RightText } from './styles';
 import Header from '../../components/Header';
 
 import connector, { Props } from './connector';
-import { userAuthentication } from '../../store/authentication/actions';
-import { setUser } from '../../store/user/actions';
 
 
 

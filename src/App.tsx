@@ -10,13 +10,13 @@ import Routes from './Routes/';
 
 
 function App() {
-  return (
-    <Provider store={store} >
-      <GlobalStyles />
-      
-      <Routes />
-    </Provider>
-  );
+    return (
+        <Provider store={store} >
+            <GlobalStyles />
+
+            <Routes />
+        </Provider>
+    );
 }
 
 export default App;

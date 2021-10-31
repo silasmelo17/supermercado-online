@@ -3,14 +3,14 @@ import { connect, ConnectedProps } from 'react-redux';
 
 import { userTokenAuthentication } from '../store/authentication/thunks';
 
-import GlobalState from '../types/GlobalState';
+import GlobalState from '../types/reduxState/GlobalState';
 
 
 
 const mapStateToProps = ( state: GlobalState ) => ({
     auth: state.authentication.auth,
     token: state.authentication.token,
-    loading: state.authentication.loading
+    loading: state.loading.now
 });
 
 const mapDispatchProps = (dispatch: any) => ({

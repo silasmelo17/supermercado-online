@@ -1,8 +1,8 @@
 
 import { Action } from 'redux';
 
-import User from '../../types/User';
-import Authentication from "../../types/Authentication";
+import User from '../../types/objects/User';
+import Authentication from "../../types/reduxState/Authentication";
 
 import { INITIAL_AUTH_STATE } from "../initialState";
 
@@ -40,11 +40,6 @@ function authenticationReducer( state:Authentication = INITIAL_AUTH_STATE, actio
                 auth: action.auth,
                 token: action.token,
                 user: undefined
-            }
-        case AuthenticationTypes.SET_LOADING_AUTHENTICATION:
-            return {
-                ...state,
-                loading: action.loading
             }
         default: 
             return state;

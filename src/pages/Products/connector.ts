@@ -1,9 +1,9 @@
 
-import GlobalState from "../../types/GlobalState";
+import GlobalState from "../../types/reduxState/GlobalState";
 
 import { connect, ConnectedProps } from 'react-redux';
 
-import ThunksProducts from '../../store/products/thunks';
+import { findProducts } from '../../store/products/thunks';
 
 
 
@@ -13,7 +13,7 @@ const mapStateToProps = (state: GlobalState) => ({
 });
 
 const mapDispatchToProps = (dispatch: any ) => ({
-    getAll: () => dispatch(ThunksProducts.findAllProducts())
+    getAll: () => dispatch( findProducts('/products') )
 });
 
 const connector = connect( mapStateToProps, mapDispatchToProps );

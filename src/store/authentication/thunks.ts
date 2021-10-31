@@ -1,63 +1,69 @@
 
 import axios from '../../config/axios.config';
-
-import { ThunkDispatch } from 'redux-thunk';
-import { AnyAction } from 'redux';
-
-import GlobalState from '../../types/GlobalState';
+import { AxiosError } from 'axios';
 
 import * as ActionsAuthentication from './actions';
-import AxiosResponseAuthentication from '../../types/AxiosResponseAuthentication';
+import AxiosResponseAuthentication from '../../types/axiosResponse/AxiosResponseAuthentication';
 
 import * as UserAction from '../user/actions';
 
+import createLoading from '../loading/createLoading';
+
+import { ThunkGlobalDispatch, getGlobalState } from '../ThunkTypes';
 
 
-export const userAuthentication = ( email: string, password: string ) => 
-    async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>) => {
-        ActionsAuthentication.setLoadingAuthentication(true);
 
-        const { data } = await axios.post<any, AxiosResponseAuthentication >(`/user/signin/`,
-            { email, password }
-        );
+export const userAuthentication = (email: string, password: string) =>
+    async (D: ThunkGlobalDispatch, G: getGlobalState) => {
+        let message;
 
-        console.log(data);
+        await createLoading(async (dispatch) => {
+            try {
+                const { data } = await axios
+                    .post<any, AxiosResponseAuthentication>(`/user/signin/`,
+                        { email, password }
+                    );
 
-        dispatch( ActionsAuthentication.userAuthentication( data.auth, data.token ) );
-        if(data.auth)
-            dispatch( UserAction.setUser(data.user) );
+                dispatch(ActionsAuthentication.userAuthentication(data.auth, data.token));
+                if (data.auth)
+                    dispatch(UserAction.setUser(data.user));
+            } catch (e) {
+                const { request, response } = e as AxiosError<{ message: string }>;
+                message = request?.data?.message || response?.data?.message;
+            }
+        }, D, G);
 
-        ActionsAuthentication.setLoadingAuthentication(false);
+        if(message)
+            alert(message);
     }
 
-export const userTokenAuthentication = () => 
-    async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState ) => {
-        ActionsAuthentication.setLoadingAuthentication(true);
-        
-        const { token } = getState().authentication;
+export const userTokenAuthentication = () =>
+    async (dispatch: ThunkGlobalDispatch, getState: getGlobalState) => {
+        await createLoading(async () => {
+            try {
+                const { token } = getState().authentication;
 
-        const { data } = await axios
-            .post<any, AxiosResponseAuthentication >(`/user/logged/`, {}, {headers: { token }} );
+                const { data } = await axios
+                    .post<any, AxiosResponseAuthentication>(`/user/logged/`, {}, { headers: { token } });
 
-        
-        console.log( 'token', data)
-
-        dispatch( ActionsAuthentication.tokenAuthentication( data.auth ) );
-        if(data.auth)
-            dispatch( UserAction.setUser(data.user) );
-
-        ActionsAuthentication.setLoadingAuthentication(false);
+                dispatch(ActionsAuthentication.tokenAuthentication(data.auth));
+                if (data.auth)
+                    dispatch(UserAction.setUser(data.user));
+            } catch (e) {
+            }
+        }, dispatch, getState);
     }
 
 export const userSignOutAuthentication = () =>
-    async (dispatch: ThunkDispatch<GlobalState, void, AnyAction>, getState: () => GlobalState ) => {
-        ActionsAuthentication.setLoadingAuthentication(false);
-        
-        const { token } = getState().authentication;
+    async (D: ThunkGlobalDispatch, G: getGlobalState) => {
+        await createLoading(async (dispatch, getState) => {
+            try {
+                const { token } = getState().authentication;
 
-        const result = await axios.post( '/user/signout', {}, { headers: {token} } );
-        if(result.status === 200)
-            dispatch( ActionsAuthentication.signOutAuthentication() );
-
-        ActionsAuthentication.setLoadingAuthentication(false);
+                const result = await axios.post('/user/signout', {}, { headers: { token } });
+                if (result.status === 200)
+                    dispatch(ActionsAuthentication.signOutAuthentication());
+            } catch (e) {
+            }
+        }, D, G);
     }

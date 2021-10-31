@@ -3,14 +3,14 @@ import { useEffect } from 'react';
 
 import connector, { Props } from "./connector";
 
-import PageTemplate from "../PageTemplate";
+import PageTemplate from "../TemplatePage";
 import ListProducts from "../../components/ListProducts";
 import Pagination from "../../components/Pagination";
 
 
 
 function TemplateProducts( { count, resetPage, children }: Props ) {
-    useEffect( () => resetPage(), [resetPage] );
+    useEffect( () => resetPage(), [] );
 
     return(
         <PageTemplate column={true}>

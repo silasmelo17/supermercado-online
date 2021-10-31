@@ -1,5 +1,6 @@
 
-import Product from '../../types/Product';
+import Category from '../../types/objects/Category';
+import Product from '../../types/objects/Product';
 
 import * as HEADER_TYPES from './types';
 
@@ -17,4 +18,9 @@ export const clearSuggestions = () => ({
 export const setHeaderView = (view: boolean) => ({
     type: HEADER_TYPES.SET_HEADER_VIEW,
     view
+});
+
+export const setCategories = (categories: Category[]) => ({
+    type: HEADER_TYPES.SET_CATEGORIES,
+    categories
 });
